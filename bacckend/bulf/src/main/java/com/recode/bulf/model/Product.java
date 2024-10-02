@@ -1,9 +1,14 @@
 package com.recode.bulf.model;
 
 import jakarta.persistence.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "product")
 @Table(name = "product")
 public class Product {
