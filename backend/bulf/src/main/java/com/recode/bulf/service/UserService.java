@@ -1,5 +1,6 @@
 package com.recode.bulf.service;
 
+import com.recode.bulf.dto.LoginRequest;
 import com.recode.bulf.model.User;
 import com.recode.bulf.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,14 @@ public class UserService {
         return "User registered successfully.";
     }
 
-    //desarollar
-    public User logIn(User user) {
-        return user;
+    public String authenticateUser(LoginRequest loginRequest) {
+
+        User user = userRepository.findByUsername(loginRequest.getUsername());
+        if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
+            // Generate a token (e.g., JWT) or return user details
+            return "your-generated-token"; // Replace with actual token generation logic
+        }
+        return null; // Return null if authentication fails
     }
 
     public List<User> getAll(){
