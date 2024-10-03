@@ -2,6 +2,7 @@ package com.recode.bulf.controller;
 
 import com.recode.bulf.model.User;
 import com.recode.bulf.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ public class RegistrationController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<String> registerUser( @RequestBody User user) {
+    public ResponseEntity<String> registerUser(@Valid @RequestBody User user) {
         String response = userService.registerUser(user);
         return ResponseEntity.ok(response);
     }

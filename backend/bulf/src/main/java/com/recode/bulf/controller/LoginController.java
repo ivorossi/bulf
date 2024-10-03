@@ -2,6 +2,7 @@ package com.recode.bulf.controller;
 
 import com.recode.bulf.dto.LoginRequest;
 import com.recode.bulf.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ public class LoginController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<String> loginUser( @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<String> loginUser(@Valid @RequestBody LoginRequest loginRequest) {
         // Authenticate the user
         String token = userService.authenticateUser(loginRequest);
         if (token != null) {
