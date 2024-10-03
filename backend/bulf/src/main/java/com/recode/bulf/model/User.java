@@ -16,7 +16,10 @@ public class User {
     private long id;
 
     @Column
-    private String name;
+    private String username;
+
+    @Column
+    private String email;
 
     @Column
     private String password;
