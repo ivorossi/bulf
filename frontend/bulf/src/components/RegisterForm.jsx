@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import axios from 'axios';
 import './RegisterForm.css';
+import { getApiUrl } from '../config';
+
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -21,8 +22,30 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8080/api/register', formData);
-      console.log('Form data submitted successfully:', response.data);
+      const registerUrl = getApiUrl('/register')
+
+      const response = await fetch(registerUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Error submitting form data');
+      }
+
+      const contentType = response.headers.get('content-type');
+      let data;
+
+      if (contentType && contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        data = await response.text();
+      }
+
+      console.log('Form data submitted successfully:', data);
       // You can add logic here to display a success message or redirect the user.
     } catch (error) {
       console.error('Error submitting form data:', error);

@@ -19,7 +19,6 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity<String> loginUser(@Valid @RequestBody LoginRequest loginRequest) {
-        // Authenticate the user
         String token = userService.authenticateUser(loginRequest);
         if (token != null) {
             return ResponseEntity.ok(token); // Return JWT or session token
