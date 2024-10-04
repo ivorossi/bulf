@@ -4,6 +4,7 @@ import logo from '../images/logo-removebg-preview.png'; // Importa tu logo
 
 function NatVar() {
   const [genders, setGenders] = useState([]);
+  const [activeGender, setActiveGender] = useState(null); // Estado para el género activo
 
   useEffect(() => {
     // Realizar el fetch para obtener géneros
@@ -23,16 +24,45 @@ function NatVar() {
     fetchGenders();
   }, []);
 
+  const handleMouseEnter = (gender) => {
+    setActiveGender(gender); // Establece el género activo
+  };
+
+  const handleMouseLeave = () => {
+    setActiveGender(null); // Limpia el género activo
+  };
+
   return (
     <div className="natvar">
       <div className="natvar-header">
         <img src={logo} alt="Logo de la tienda" className="logo" />
-        <h2>Categorías</h2>
-        <ul className="genders-list">
-          {genders.map((gender, index) => (
-            <li key={index} className="gender-item">{gender.name}</li> // Muestra solo el nombre
+        
+        <div className="genders-container">
+          {genders.map((gender) => (
+            <div
+              key={gender.id}
+              className="gender-button"
+              onMouseEnter={() => handleMouseEnter(gender)}
+              onMouseLeave={handleMouseLeave}
+            >
+              {gender.name}
+              {activeGender && activeGender.id === gender.id && (
+                <div className="dropdown">
+                  {/* Aquí asumiendo que cada género tiene categorías asociadas */}
+                  {gender.categories && gender.categories.length > 0 ? (
+                    <ul>
+                      {gender.categories.map((category) => (
+                        <li key={category.id}>{category.name}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>No hay categorías disponibles</p>
+                  )}
+                </div>
+              )}
+            </div>
           ))}
-        </ul>
+        </div>
         <h1 className="store-name">Nombre de la Tienda</h1>
       </div>
     </div>

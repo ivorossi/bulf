@@ -30,7 +30,7 @@ public class User {
     private String password;
 
     @Column(columnDefinition = "boolean default false")
-    private String isAdmin;
+    private boolean isAdmin;
 
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
