@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import './RegisterForm.css';
-import { getApiUrl } from '../config';
-
+import { getApiUrl } from '../config'; // Asegúrate de que esta función esté bien configurada
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +21,7 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const registerUrl = getApiUrl('/register')
+      const registerUrl = getApiUrl('/auth/register'); // Asegúrate de que esta URL sea correcta
 
       const response = await fetch(registerUrl, {
         method: 'POST',
@@ -30,10 +29,12 @@ const RegisterForm = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData)
+        
       });
-
+      console.log(JSON.stringify(formData))
       if (!response.ok) {
-        throw new Error('Error submitting form data');
+        const errorData = await response.json(); // Intentamos obtener detalles del error
+        throw new Error(errorData.message || 'Error submitting form data');
       }
 
       const contentType = response.headers.get('content-type');
@@ -46,10 +47,10 @@ const RegisterForm = () => {
       }
 
       console.log('Form data submitted successfully:', data);
-      // You can add logic here to display a success message or redirect the user.
+      // Aquí puedes agregar lógica para mostrar un mensaje de éxito o redirigir al usuario
     } catch (error) {
       console.error('Error submitting form data:', error);
-      // Handle the error (e.g., show an error message).
+      // Maneja el error (por ejemplo, mostrar un mensaje de error)
     }
   };
 

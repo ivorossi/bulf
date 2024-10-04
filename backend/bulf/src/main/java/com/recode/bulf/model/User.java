@@ -2,26 +2,33 @@ package com.recode.bulf.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
-@Entity(name = "users")
+@AllArgsConstructor
+@Entity
 @Table(name = "users")
 public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue
+    private Integer id;
 
-    @Column
-    private String username;
+    @Column(nullable = false)
+    private String name;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    private List<Token> tokens;
 }
