@@ -1,0 +1,32 @@
+.natvar {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 16px 0;
+    background: linear-gradient(to right, #6a5acd, #4682b4); /* Violeta y azul */
+    color: white;
+  }
+  
+  .natvar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    width: 50px; /* Ajusta el tamaño según sea necesario */
+    height: auto;
+  }
+  
+  .store-name {
+    font-weight: bold;
+    font-size: 24px;
+  }
+  
+  .categories-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .categories-list li {
+    margin: 8px 0;
+  }
