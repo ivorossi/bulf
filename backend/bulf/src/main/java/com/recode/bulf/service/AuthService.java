@@ -28,11 +28,13 @@ public class AuthService {
 
     public TokenResponse register(final RegisterRequest request) {
         final User user = User.builder()
-                .name(request.name())
+                .username(request.username())
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
                 .build();
-
+        System.out.println(request.username());
+        System.out.println(request.email());
+        System.out.println(request.password());
         final User savedUser = userRepository.save(user);
         final String jwtToken = jwtService.generateToken(savedUser);
         final String refreshToken = jwtService.generateRefreshToken(savedUser);

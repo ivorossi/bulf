@@ -1,7 +1,7 @@
 package com.recode.bulf.controller;
 
 public record RegisterRequest(
-        String name,
+        String username,
         String email,
         String password
 ) {
