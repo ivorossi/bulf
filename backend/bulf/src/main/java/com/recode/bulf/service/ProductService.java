@@ -5,6 +5,7 @@ import com.recode.bulf.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -14,6 +15,7 @@ public class ProductService {
 
 
     public Product create(Product product) {
+        product.setDate(LocalDateTime.now());
         return productRepository.save(product);
     }
 

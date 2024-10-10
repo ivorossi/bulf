@@ -60,9 +60,9 @@ const ProductForm = () => {
 
     const product = {
       name,
-      genderId: selectedGender,
-      categoryId: selectedCategory,
-      subCategoryId: subcategories.length ? subcategories[0].id : '',
+      gender_id: selectedGender,
+      category: selectedCategory,
+      subCategory: subcategories.length ? subcategories[0].id : '',
       mainImage,
       images,
       description,
@@ -71,12 +71,13 @@ const ProductForm = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/api/product/create', {
+      const response = await fetch('http://localhost:8080/api/v1/auth/create/product', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(product),
+        
       });
 
       if (response.ok) {
