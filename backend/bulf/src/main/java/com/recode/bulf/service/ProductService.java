@@ -16,6 +16,7 @@ public class ProductService {
 
     public Product create(Product product) {
         product.setDate(LocalDateTime.now());
+        System.out.println(product);
         return productRepository.save(product);
     }
 

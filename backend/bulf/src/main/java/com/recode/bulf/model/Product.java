@@ -1,5 +1,6 @@
 package com.recode.bulf.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,20 +21,19 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "gender_id", nullable = false)
-    private Gender gender; // Relación con Gender
+    @Column(name = "gender_id", nullable = false)
+    private long genderId; // ID del género
 
-    @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category; // Relación con Category
 
-    @ManyToOne
-    @JoinColumn(name = "subcategory_id", nullable = false)
-    private Subcategory subCategory; // Relación con Subcategory
+    @Column(name = "category_id", nullable = false)
+    
+    private long category; // Relación con Category
+
+    @Column(name = "subcategory_id", nullable = false)
+    private long subcategoryId; // ID de la subcategoría
 
     @Column
     private String mainImage;
@@ -53,4 +53,22 @@ public class Product {
     @Column
     private LocalDateTime date;
 
+    // Getters, setters y toString
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", genderId=" + genderId +
+                ", categoryId=" + (category != null ? category.getId() : null) +  // Acceso al ID de Category
+                ", subcategoryId=" + subcategoryId +
+                ", mainImage='" + mainImage + '\'' +
+                ", images=" + images +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", stock=" + stock +
+                ", date=" + date +
+                '}';
+    }
 }

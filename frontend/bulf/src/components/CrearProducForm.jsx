@@ -8,6 +8,7 @@ const ProductForm = () => {
   const [subcategories, setSubcategories] = useState([]);
   const [selectedGender, setSelectedGender] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedSubcategory, setSelectedSubcategory] = useState(''); // Agregar estado para subcategoría
 
   const [name, setName] = useState('');
   const [mainImage, setMainImage] = useState('');
@@ -40,6 +41,8 @@ const ProductForm = () => {
     if (selectedGenderObj) {
       setCategories(selectedGenderObj.categories || []);
       setSubcategories([]); // Resetear subcategorías al cambiar de categoría
+      setSelectedCategory(''); // Resetear categoría
+      setSelectedSubcategory(''); // Resetear subcategoría
     }
   };
 
@@ -52,7 +55,13 @@ const ProductForm = () => {
     const selectedCategoryObj = categories.find(category => category.id === parseInt(categoryId));
     if (selectedCategoryObj) {
       setSubcategories(selectedCategoryObj.subcategories || []);
+      setSelectedSubcategory(''); // Resetear subcategoría
     }
+  };
+
+  // Manejar cambio de subcategoría seleccionada
+  const handleSubcategoryChange = (e) => {
+    setSelectedSubcategory(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -62,7 +71,7 @@ const ProductForm = () => {
       name,
       gender_id: selectedGender,
       category: selectedCategory,
-      subCategory: subcategories.length ? subcategories[0].id : '',
+      subCategory: selectedSubcategory, // Enviar la subcategoría seleccionada
       mainImage,
       images,
       description,
@@ -77,7 +86,6 @@ const ProductForm = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(product),
-        
       });
 
       if (response.ok) {
@@ -148,6 +156,8 @@ const ProductForm = () => {
         <label htmlFor="subcategory">Subcategoría:</label>
         <select
           id="subcategory"
+          value={selectedSubcategory}
+          onChange={handleSubcategoryChange} // Agregar cambio de subcategoría
           required
           disabled={!subcategories.length} // Desactivar si no hay subcategorías
         >
