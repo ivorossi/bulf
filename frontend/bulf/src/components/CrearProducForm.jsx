@@ -69,9 +69,9 @@ const ProductForm = () => {
 
     const product = {
       name,
-      gender_id: selectedGender,
-      category: selectedCategory,
-      subCategory: selectedSubcategory, // Enviar la subcategoría seleccionada
+      genderId: selectedGender,
+      categoryId: selectedCategory,
+      subcategoryId: selectedSubcategory,
       mainImage,
       images,
       description,
