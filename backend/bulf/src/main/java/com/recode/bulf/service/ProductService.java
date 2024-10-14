@@ -1,8 +1,13 @@
 package com.recode.bulf.service;
 
+import com.recode.bulf.dto.ProductCard;
 import com.recode.bulf.model.Product;
 import com.recode.bulf.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,6 +20,10 @@ public class ProductService {
 
     public List<Product> getAll(){
         return productRepository.findAll();
+    }
+    public Page<ProductCard> getPagedProducts(int page) {
+        Pageable pageable = PageRequest.of(page, 20, Sort.by("date").descending());
+        return productRepository.findAllReducedProducts(pageable);
     }
 
 }
