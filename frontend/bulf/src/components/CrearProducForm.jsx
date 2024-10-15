@@ -173,7 +173,7 @@ const ProductForm = () => {
       <div className="form-group">
         <label htmlFor="mainImage">Imagen principal:</label>
         <input
-          type="text"
+          type="file"
           id="mainImage"
           value={mainImage}
           onChange={(e) => setMainImage(e.target.value)}
