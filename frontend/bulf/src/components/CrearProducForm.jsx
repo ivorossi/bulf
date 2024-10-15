@@ -17,7 +17,6 @@ const ProductForm = () => {
   const [price, setPrice] = useState(0);
   const [stock, setStock] = useState(0);
 
-  // Fetch para obtener los géneros (y categorías asociadas)
   useEffect(() => {
     const fetchGenders = async () => {
       try {
@@ -36,7 +35,6 @@ const ProductForm = () => {
     const genderId = e.target.value;
     setSelectedGender(genderId);
 
-    // Encuentra las categorías asociadas con el género seleccionado
     const selectedGenderObj = genders.find(gender => gender.id === parseInt(genderId));
     if (selectedGenderObj) {
       setCategories(selectedGenderObj.categories || []);
@@ -46,20 +44,17 @@ const ProductForm = () => {
     }
   };
 
-  // Manejar cambio de categoría seleccionada
   const handleCategoryChange = (e) => {
     const categoryId = e.target.value;
     setSelectedCategory(categoryId);
 
-    // Encuentra las subcategorías asociadas con la categoría seleccionada
     const selectedCategoryObj = categories.find(category => category.id === parseInt(categoryId));
     if (selectedCategoryObj) {
       setSubcategories(selectedCategoryObj.subcategories || []);
-      setSelectedSubcategory(''); // Resetear subcategoría
+      setSelectedSubcategory('');
     }
   };
 
-  // Manejar cambio de subcategoría seleccionada
   const handleSubcategoryChange = (e) => {
     setSelectedSubcategory(e.target.value);
   };
