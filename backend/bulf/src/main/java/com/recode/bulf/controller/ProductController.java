@@ -26,6 +26,8 @@ public class ProductController {
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         Optional<Product> product = productService.getProductById(id);
         if (product.isPresent()) {
+            System.out.println(product.get().getImages().size());
+            
             return ResponseEntity.ok(product.get());
         } else {
             return ResponseEntity.notFound().build();
