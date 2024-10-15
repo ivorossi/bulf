@@ -1,25 +1,18 @@
-import  'react';
-import PropTypes from 'prop-types'; // Importa PropTypes
+import 'react';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate
 import './ProductCard.css';
 
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate(); // Inicializa useNavigate
+
   if (!product) return null;
 
   const handleClick = async () => {
     try {
-      // Hacemos la petición GET a la API usando el id del producto
-      const response = await fetch(`http://localhost:8080/api/products/${product.id}`);
-      if (!response.ok) {
-        throw new Error('Error al obtener el producto');
-      }
-
-      const productData = await response.json();
-      console.log('Producto obtenido:', productData);
-
-      // Aquí puedes manejar lo que harás con los datos recibidos,
-      // como mostrar un modal, redirigir a otra página, etc.
+      navigate(`/product/${product.id}`);
     } catch (error) {
-      console.error('Error en la petición:', error);
+      console.error('Error en la redirección:', error);
     }
   };
 
