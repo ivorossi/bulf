@@ -27,4 +27,8 @@ public class ProductService {
         return productRepository.findAllReducedProducts(pageable);
     }
 
+    public Page<ProductCard> getPagedProductsByGender(int page, Long genderId) {
+        Pageable pageable = PageRequest.of(page, 20);
+        return productRepository.findReducedProductsByGender(genderId, pageable);
+    }
 }

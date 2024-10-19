@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@RequestMapping("/api")
+@RequestMapping("/api/product")
 @RestController
 @RequiredArgsConstructor
 public class ProductController {
@@ -22,7 +22,7 @@ public class ProductController {
     private final ProductService productService;
 
 
-    @GetMapping("/product/id/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         Optional<Product> product = productService.getProductById(id);
         if (product.isPresent()) {
@@ -32,10 +32,18 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/product/paged")
+    @GetMapping("/pag")
     public ResponseEntity<Page<ProductCard>> getPagedProducts(
             @RequestParam(defaultValue = "0") int page) {
         Page<ProductCard> products = productService.getPagedProducts(page);
+        return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/pag/gender")
+    public ResponseEntity<Page<ProductCard>> getPagedProductsByGender(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam Long genderId) {
+        Page<ProductCard> products = productService.getPagedProductsByGender(page, genderId);
         return ResponseEntity.ok(products);
     }
 }
