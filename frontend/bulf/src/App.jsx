@@ -19,7 +19,7 @@ function App() {
       <ProductsList/>
   
       <Routes>
-      <Route path="/product/:id" element={<ProductView />} /> {}
+      <Route path="/item/:id" element={<ProductView />} />{}
       </Routes>
     </div>
     </Router>

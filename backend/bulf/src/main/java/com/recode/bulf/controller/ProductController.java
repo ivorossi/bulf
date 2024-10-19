@@ -32,12 +32,14 @@ public class ProductController {
         }
     }
 
+    @GetMapping
     public ResponseEntity<Page<ProductCard>> getPagedProducts(
             @RequestParam(defaultValue = "0") int page) {
         Page<ProductCard> products = productService.getPagedProducts(page);
         return ResponseEntity.ok(products);
     }
 
+    @GetMapping("/gender")
     public ResponseEntity<Page<ProductCard>> getPagedProductsByGender(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam Long gender) {
@@ -45,6 +47,7 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    @GetMapping("/category")
     public ResponseEntity<Page<ProductCard>> getPagedProductsByCategory(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam Long category) {

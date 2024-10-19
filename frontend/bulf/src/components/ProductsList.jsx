@@ -10,7 +10,7 @@ const ProductsList = () => {
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    const productsListUrl = getApiUrl(`/product/pag?page=${currentPage - 1}`);
+    const productsListUrl = getApiUrl(`/product?page=${currentPage - 1}`);
     fetch(productsListUrl)
       .then((res) => res.json())
       .then((data) => {
