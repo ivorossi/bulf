@@ -22,7 +22,7 @@ public class ProductController {
     private final ProductService productService;
 
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/item/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         Optional<Product> product = productService.getProductById(id);
         if (product.isPresent()) {
@@ -32,18 +32,23 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/pag")
     public ResponseEntity<Page<ProductCard>> getPagedProducts(
             @RequestParam(defaultValue = "0") int page) {
         Page<ProductCard> products = productService.getPagedProducts(page);
         return ResponseEntity.ok(products);
     }
 
-    @GetMapping("/pag/gender")
     public ResponseEntity<Page<ProductCard>> getPagedProductsByGender(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam Long genderId) {
-        Page<ProductCard> products = productService.getPagedProductsByGender(page, genderId);
+            @RequestParam Long gender) {
+        Page<ProductCard> products = productService.getPagedProductsByGender(page, gender);
+        return ResponseEntity.ok(products);
+    }
+
+    public ResponseEntity<Page<ProductCard>> getPagedProductsByCategory(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam Long category) {
+        Page<ProductCard> products = productService.getPagedProductsByCategory(page, category);
         return ResponseEntity.ok(products);
     }
 }

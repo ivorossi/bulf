@@ -13,7 +13,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT new com.recode.bulf.dto.ProductCard(p.id, p.name, p.mainImage, p.description, p.price) " +
             "FROM Product p ORDER BY p.date DESC")
     Page<ProductCard> findAllReducedProducts(Pageable pageable);
+
     @Query("SELECT new com.recode.bulf.dto.ProductCard(p.id, p.name, p.mainImage, p.description, p.price) " +
-            "FROM Product p WHERE p.gender.id = :genderId ORDER BY p.date DESC")
+            "FROM Product p WHERE p.genderId = :genderId ORDER BY p.date DESC")
     Page<ProductCard> findReducedProductsByGender(@Param("genderId") Long genderId, Pageable pageable);
+
+    @Query("SELECT new com.recode.bulf.dto.ProductCard(p.id, p.name, p.mainImage, p.description, p.price) " +
+            "FROM Product p WHERE p.categoryId = :categoryId ORDER BY p.date DESC")
+    Page<ProductCard> findReducedProductsByCategory(@Param("categoryId") Long categoryId, Pageable pageable);
 }
