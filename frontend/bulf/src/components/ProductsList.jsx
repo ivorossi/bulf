@@ -15,17 +15,23 @@ const ProductsList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       let productsListUrl = getApiUrl(`/product?page=${currentPage - 1}`);
-
-      // Agregar filtros de género y categoría a la URL
-      if (selectedGenderId) {
-        productsListUrl += `&gender=${selectedGenderId}`;
-      }
-      if (selectedCategoryId) {
-        productsListUrl += `&category=${selectedCategoryId}`;
-      }
-
+  
       try {
-        const response = await fetch(productsListUrl);
+        let response;
+  
+        // Si se ha seleccionado un género, utilizar la ruta de género
+        if (selectedGenderId) {
+          productsListUrl = getApiUrl(`/product/gender?page=${currentPage - 1}&gender=${selectedGenderId}`);
+        } 
+        // Si se ha seleccionado una categoría, utilizar la ruta de categoría
+        else if (selectedCategoryId) {
+          productsListUrl = getApiUrl(`/product/category?page=${currentPage - 1}&category=${selectedCategoryId}`);
+        } else {
+          // Si no hay filtros aplicados, se puede obtener productos sin filtros.
+          productsListUrl = getApiUrl(`/product?page=${currentPage - 1}`);
+        }
+  
+        response = await fetch(productsListUrl);
         const data = await response.json();
         setProducts(data.content);
         setTotalPages(data.totalPages);
@@ -33,9 +39,10 @@ const ProductsList = () => {
         console.error('Error fetching products:', error);
       }
     };
-
+    console.log('Fetching products with:', { currentPage, selectedGenderId, selectedCategoryId }); // Agrega este log
     fetchProducts();
-  }, [currentPage, selectedGenderId, selectedCategoryId]); // Dependencias que desencadenan la actualización
+  }, [currentPage, selectedGenderId, selectedCategoryId]);
+
 
   useEffect(() => {
     // Resetear la página actual a 1 cuando se cambie el género o la categoría
