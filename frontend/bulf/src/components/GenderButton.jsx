@@ -1,25 +1,47 @@
-import 'react';
-import './GenderButton.css';
+import { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import CategoryButton from './CategoryButton'; // Asegúrate de que la ruta sea correcta
+import './GenderButton.css';
+import { ProductFilterContext } from './ProductFilterContext';
+import CategoryButton from './CategoryButton';
 
-const GenderButton = ({ gender, onMouseEnter, onMouseLeave, isActive }) => {
+const GenderButton = ({ gender }) => {
+  const { handleGenderSelect } = useContext(ProductFilterContext);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false); // Para controlar la visibilidad del menú
+
+  const handleMouseEnter = () => {
+    setIsDropdownVisible(true); // Muestra el menú al pasar el mouse
+  };
+
+  const handleMouseLeave = () => {
+    setIsDropdownVisible(false); // Oculta el menú al salir
+  };
+
+  const handleClick = () => {
+    handleGenderSelect(gender.id); // Selecciona el género y deselecciona la categoría
+  };
+
   return (
     <div
-      className={`gender-button ${isActive ? 'active' : ''}`}
-      onMouseEnter={() => onMouseEnter(gender)}
-      onMouseLeave={onMouseLeave}
+      className={'gender-button'}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
-      {gender.name}
-      {isActive && gender.categories && (
+        <div onClick={handleClick}>
+            {gender.name}
+        </div>
+      {isDropdownVisible && (
         <div className="dropdown">
-          <ul>
-            {gender.categories.map((category) => (
-              <li key={category.id}>
-                <CategoryButton category={category} />
-              </li>
-            ))}
-          </ul>
+          {gender.categories && gender.categories.length > 0 ? (
+            <ul>
+              {gender.categories.map((category) => (
+                <li key={category.id}>
+                  <CategoryButton category={category} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No hay categorías disponibles</p>
+          )}
         </div>
       )}
     </div>
@@ -37,9 +59,6 @@ GenderButton.propTypes = {
       })
     ),
   }).isRequired,
-  onMouseEnter: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
-  isActive: PropTypes.bool.isRequired,
 };
 
 export default GenderButton;

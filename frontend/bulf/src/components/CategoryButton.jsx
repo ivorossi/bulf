@@ -1,12 +1,18 @@
-import 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
-import './CategoryButton.css'; // Asegúrate de tener este archivo
+import './CategoryButton.css';
+import { ProductFilterContext } from './ProductFilterContext';
 
 const CategoryButton = ({ category }) => {
+  const { handleCategorySelect } = useContext(ProductFilterContext);
+
   return (
-    <div className="category-button">
+    <button
+      className="category-button"
+      onClick={() => handleCategorySelect(category.id)}
+    >
       {category.name}
-    </div>
+    </button>
   );
 };
 
