@@ -3,8 +3,10 @@ import GenderButton from './GenderButton';
 import './NatVar.css';
 import logo from '../images/logo-removebg-preview.png';
 import { ProductFilterContext } from './ProductFilterContext';
+import { useNavigate } from 'react-router-dom';
 
 function NatVar() {
+  const navigate = useNavigate();
   const [genders, setGenders] = useState([]);
   const { handleGenderSelect, handleCategorySelect } = useContext(ProductFilterContext); // Importa el contexto
 
@@ -26,8 +28,13 @@ function NatVar() {
   }, []);
 
   const handleHomeClick = () => {
-    handleGenderSelect(null); // Restablece el género a null
-    handleCategorySelect(null); // Restablece la categoría a null
+    handleGenderSelect(null); 
+    handleCategorySelect(null);
+    try {
+      navigate('/home');
+    } catch (error) {
+      console.error('Error en la redirección:', error);
+    }
   };
 
   return (

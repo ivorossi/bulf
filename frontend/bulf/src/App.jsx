@@ -16,8 +16,9 @@ function App() {
     <ProductFilterProvider>
       <NatVar />
 
-      <ProductsList />
+      
       <Routes>
+      <Route path="/home" element={<ProductsList />} />{}
       <Route path="/item/:id" element={<ProductView />} />{}
       </Routes>
       <RegisterForm />
