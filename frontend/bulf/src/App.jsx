@@ -3,8 +3,8 @@ import RegisterForm from './components/RegisterForm';
 import NatVar from './components/Natvar';
 import ProductForm from './components/CrearProducForm'
 import ProductsList from './components/ProductsList'
-import ProductView from './components/ProductView'; // Asegúrate de importar el componente de vista del producto
-import { ProductFilterProvider } from './components/ProductFilterContext';
+import ProductView from './components/ProductView';
+import {ProductFilterProvider} from './components/ProductFilterContext';
 
 
 
@@ -17,10 +17,11 @@ function App() {
 
       
       <Routes>
-      <Route path="/home" element={<ProductsList />} />{}
-      <Route path="/item/:id" element={<ProductView />} />{}
+      <Route path="/home" element={<ProductsList />}/>
+      <Route path="/item/:id" element={<ProductView />}/>
+      <Route path="/signup" element={<RegisterForm />}/>
       </Routes>
-      <RegisterForm />
+      
       <ProductForm />  
     </ProductFilterProvider>
 

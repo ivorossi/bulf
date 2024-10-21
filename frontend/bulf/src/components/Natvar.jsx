@@ -4,8 +4,8 @@ import './NatVar.css';
 import logo from '../images/logo-removebg-preview.png';
 import { ProductFilterContext } from './ProductFilterContext';
 import { useNavigate } from 'react-router-dom';
-import LoginForm from './LoguinForm'; 
-import Modal from 'react-modal'; 
+import LoginForm from './LoginForm'; // Importa el formulario de login
+import Modal from 'react-modal'; // Si decides usar react-modal
 
 Modal.setAppElement('#root'); // Asegúrate de tener el elemento root para accesibilidad
 
@@ -46,6 +46,10 @@ function NatVar() {
     setIsLoginOpen(!isLoginOpen); // Cambia el estado del modal
   };
 
+  const closeModal = () => {
+    setIsLoginOpen(false); // Cierra el modal
+  };
+
   return (
     <div className="natvar">
       <div className="natvar-header">
@@ -67,15 +71,14 @@ function NatVar() {
         isOpen={isLoginOpen}
         onRequestClose={toggleLoginModal}
         contentLabel="Login Modal"
-        className="modal" // Puedes personalizar el estilo con CSS
-        overlayClassName="modal-overlay" // Estilo para el fondo oscuro
+        className="modal" 
+        overlayClassName="modal-overlay"
       >
-        <button onClick={toggleLoginModal} className="close-modal">X</button> {/* Botón para cerrar el modal */}
-        <LoginForm /> {/* Renderiza el formulario de login dentro del modal */}
+        <button onClick={toggleLoginModal} className="close-modal">X</button>
+        <LoginForm closeModal={closeModal} /> {/* Pasa la función para cerrar el modal */}
       </Modal>
     </div>
   );
 }
 
 export default NatVar;
-
