@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
 import RegisterForm from './components/RegisterForm';
-import LoginForm from './components/LoguinForm';
 import NatVar from './components/Natvar';
 import ProductForm from './components/CrearProducForm'
 import ProductsList from './components/ProductsList'
@@ -22,7 +21,6 @@ function App() {
       <Route path="/item/:id" element={<ProductView />} />{}
       </Routes>
       <RegisterForm />
-      <LoginForm />
       <ProductForm />  
     </ProductFilterProvider>
 
