@@ -4,22 +4,23 @@ import com.recode.bulf.model.Category;
 import com.recode.bulf.model.Gender;
 import com.recode.bulf.model.Product;
 import com.recode.bulf.model.Subcategory;
-import com.recode.bulf.service.AdminCreateService;
+import com.recode.bulf.service.AdminService;
+import com.recode.bulf.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/auth/create")
+@RequestMapping("/api/auth/admin")
 @RequiredArgsConstructor
 public class AdminCreateController {
     @Autowired
-    private final AdminCreateService adminService;
+    private final AdminService adminService;
+    @Autowired
+    private final ProductService productService;
 
     @PostMapping("/gender")
     public ResponseEntity<Gender> createGender(@RequestBody Gender gender) {
@@ -41,7 +42,15 @@ public class AdminCreateController {
 
     @PostMapping("/product")
     public ResponseEntity<Void> createProduct(@Valid @RequestBody Product product) {
-        adminService.createProduct(product);
-        return ResponseEntity.status(201).build(); // 201 Created
+        productService.createProduct(product);
+        return ResponseEntity.status(201).build();
+    }
+
+    @GetMapping("/product")
+    public ResponseEntity<Page<Product>> getPagedProducts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "100") int size) {
+        Page<Product> products = productService.getPagedProducts(page, size);
+        return ResponseEntity.ok(products);
     }
 }
