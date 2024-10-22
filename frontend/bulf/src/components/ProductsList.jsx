@@ -19,15 +19,12 @@ const ProductsList = () => {
       try {
         let response;
   
-        // Si se ha seleccionado un género, utilizar la ruta de género
         if (selectedGenderId) {
           productsListUrl = getApiUrl(`/product/gender?page=${currentPage - 1}&gender=${selectedGenderId}`);
         } 
-        // Si se ha seleccionado una categoría, utilizar la ruta de categoría
         else if (selectedCategoryId) {
           productsListUrl = getApiUrl(`/product/category?page=${currentPage - 1}&category=${selectedCategoryId}`);
         } else {
-          // Si no hay filtros aplicados, se puede obtener productos sin filtros.
           productsListUrl = getApiUrl(`/product?page=${currentPage - 1}`);
         }
   

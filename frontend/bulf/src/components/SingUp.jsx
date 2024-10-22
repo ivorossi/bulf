@@ -1,22 +1,19 @@
 import { useState } from 'react';
-import './RegisterForm.css';
-import { getApiUrl } from '../config';
-import { useNavigate } from 'react-router-dom'; 
-import PropTypes from 'prop-types';
+import './Sing.css';
+import { getApiUrl } from '../config'; 
 
-const LoginForm = ({ closeModal }) => { 
+const RegisterForm = () => {
   const [formData, setFormData] = useState({
+    username: '',
     email: '',
-    password: '',
+    password: ''
   });
-
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: value
     });
   };
 
@@ -24,19 +21,20 @@ const LoginForm = ({ closeModal }) => {
     e.preventDefault();
 
     try {
-      const loginUrl = getApiUrl('/auth/login');
-      const response = await fetch(loginUrl, {
+      const registerUrl = getApiUrl('/auth/register'); 
+
+      const response = await fetch(registerUrl, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
       });
 
       if (!response.ok) {
-        const errorMessage = await response.text();
-        alert(errorMessage); 
-        throw new Error('Login failed');
+          const errorMessage = await response.text();
+          alert(errorMessage); 
+          throw new Error('Login failed');
       }
 
       const contentType = response.headers.get('content-type');
@@ -49,27 +47,30 @@ const LoginForm = ({ closeModal }) => {
       }
 
       console.log('Login successful:', data);
-
-      closeModal();
-
     } catch (error) {
       console.error('Login failed:', error.message);
     }
   };
 
-  const handleSignUpClick = () => {
-    navigate('/signup');
-    closeModal();
-  };
-
   return (
     <form className="register-form" onSubmit={handleSubmit}>
-      <h2>Login</h2>
+      <h2>Singup</h2>
+      <div className="form-group">
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          required
+        />
+      </div>
       <div className="form-group">
         <label htmlFor="email">Email:</label>
         <input
-          type="text"
-          id="email-loguin"
+          type="email"
+          id="email"
           name="email"
           value={formData.email}
           onChange={handleChange}
@@ -80,23 +81,16 @@ const LoginForm = ({ closeModal }) => {
         <label htmlFor="password">Password:</label>
         <input
           type="password"
-          id="password-loguin"
+          id="password"
           name="password"
           value={formData.password}
           onChange={handleChange}
           required
         />
       </div>
-      <button type="submit">Login</button>
-      <button type="button" onClick={handleSignUpClick} className="signup-button">
-        Sign Up
-      </button>
+      <button type="submit">Send</button>
     </form>
   );
 };
 
-LoginForm.propTypes = {
-  closeModal: PropTypes.func.isRequired,
-};
-
-export default LoginForm;
+export default RegisterForm;

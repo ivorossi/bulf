@@ -1,19 +1,22 @@
 import { useState } from 'react';
-import './RegisterForm.css';
-import { getApiUrl } from '../config'; // Asegúrate de que esta función esté bien configurada
+import './Sing.css';
+import { getApiUrl } from '../config';
+import { useNavigate } from 'react-router-dom'; 
+import PropTypes from 'prop-types';
 
-const RegisterForm = () => {
+const LoginForm = ({ closeModal }) => { 
   const [formData, setFormData] = useState({
-    username: '',
     email: '',
-    password: ''
+    password: '',
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -21,20 +24,19 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const registerUrl = getApiUrl('/auth/register'); // Asegúrate de que esta URL sea correcta
-
-      const response = await fetch(registerUrl, {
+      const loginUrl = getApiUrl('/auth/login');
+      const response = await fetch(loginUrl, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
-          const errorMessage = await response.text();
-          alert(errorMessage); // Mostrar el mensaje de error en un alert
-          throw new Error('Login failed');
+        const errorMessage = await response.text();
+        alert(errorMessage); 
+        throw new Error('Login failed');
       }
 
       const contentType = response.headers.get('content-type');
@@ -47,32 +49,27 @@ const RegisterForm = () => {
       }
 
       console.log('Login successful:', data);
-      // Aquí puedes almacenar el token o los detalles del usuario según sea necesario
+
+      closeModal();
+
     } catch (error) {
       console.error('Login failed:', error.message);
-      // Manejar el error (por ejemplo, mostrar un mensaje de error)
     }
+  };
+
+  const handleSignUpClick = () => {
+    navigate('/signup');
+    closeModal();
   };
 
   return (
     <form className="register-form" onSubmit={handleSubmit}>
-      <h2>Register</h2>
-      <div className="form-group">
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        />
-      </div>
+      <h2>Login</h2>
       <div className="form-group">
         <label htmlFor="email">Email:</label>
         <input
-          type="email"
-          id="email"
+          type="text"
+          id="email-loguin"
           name="email"
           value={formData.email}
           onChange={handleChange}
@@ -83,16 +80,25 @@ const RegisterForm = () => {
         <label htmlFor="password">Password:</label>
         <input
           type="password"
-          id="password"
+          id="password-loguin"
           name="password"
           value={formData.password}
           onChange={handleChange}
           required
         />
       </div>
-      <button type="submit">Register</button>
+      <button type="submit">Sing In</button>
+      <br />
+      <p>do not have an account?</p>
+      <button type="button" onClick={handleSignUpClick} className="signup-button">
+        Signup
+      </button>
     </form>
   );
 };
 
-export default RegisterForm;
+LoginForm.propTypes = {
+  closeModal: PropTypes.func.isRequired,
+};
+
+export default LoginForm;
