@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import ProductCard from './ProductCard';
 import Pagination from './Pagination';
-import './ProductsList.css'; 
+import './ProductsList.css';
 import { getApiUrl } from '../config';
 import { ProductFilterContext } from './ProductFilterContext';
 
@@ -15,19 +15,19 @@ const ProductsList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       let productsListUrl = getApiUrl(`/product?page=${currentPage - 1}`);
-  
+
       try {
         let response;
-  
+
         if (selectedGenderId) {
           productsListUrl = getApiUrl(`/product/gender?page=${currentPage - 1}&gender=${selectedGenderId}`);
-        } 
+        }
         else if (selectedCategoryId) {
           productsListUrl = getApiUrl(`/product/category?page=${currentPage - 1}&category=${selectedCategoryId}`);
         } else {
           productsListUrl = getApiUrl(`/product?page=${currentPage - 1}`);
         }
-  
+
         response = await fetch(productsListUrl);
         const data = await response.json();
         setProducts(data.content);
@@ -36,13 +36,12 @@ const ProductsList = () => {
         console.error('Error fetching products:', error);
       }
     };
-    console.log('Fetching products with:', { currentPage, selectedGenderId, selectedCategoryId }); // Agrega este log
+    console.log('Fetching products with:', { currentPage, selectedGenderId, selectedCategoryId });
     fetchProducts();
   }, [currentPage, selectedGenderId, selectedCategoryId]);
 
 
   useEffect(() => {
-    // Resetear la página actual a 1 cuando se cambie el género o la categoría
     setCurrentPage(1);
   }, [selectedGenderId, selectedCategoryId]);
 

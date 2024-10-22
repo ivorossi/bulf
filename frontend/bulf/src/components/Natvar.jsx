@@ -51,11 +51,11 @@ function NatVar() {
   };
 
   const toggleLoginModal = () => {
-    setIsLoginOpen(!isLoginOpen); 
+    setIsLoginOpen(!isLoginOpen);
   };
 
   const closeModal = () => {
-    setIsLoginOpen(false); 
+    setIsLoginOpen(false);
   };
 
   return (
@@ -78,7 +78,7 @@ function NatVar() {
         isOpen={isLoginOpen}
         onRequestClose={toggleLoginModal}
         contentLabel="Login Modal"
-        className="modal" 
+        className="modal"
         overlayClassName="modal-overlay"
       >
         <button onClick={toggleLoginModal} className="close-modal">X</button>

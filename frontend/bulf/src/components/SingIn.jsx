@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import './Sing.css';
 import { getApiUrl } from '../config';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const LoginForm = ({ closeModal }) => { 
+const LoginForm = ({ closeModal }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -35,7 +35,7 @@ const LoginForm = ({ closeModal }) => {
 
       if (!response.ok) {
         const errorMessage = await response.text();
-        alert(errorMessage); 
+        alert(errorMessage);
         throw new Error('Login failed');
       }
 

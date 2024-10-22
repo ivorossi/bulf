@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './Sing.css';
-import { getApiUrl } from '../config'; 
+import { getApiUrl } from '../config';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ const RegisterForm = () => {
     e.preventDefault();
 
     try {
-      const registerUrl = getApiUrl('/auth/register'); 
+      const registerUrl = getApiUrl('/auth/register');
 
       const response = await fetch(registerUrl, {
         method: 'POST',
@@ -32,9 +32,9 @@ const RegisterForm = () => {
       });
 
       if (!response.ok) {
-          const errorMessage = await response.text();
-          alert(errorMessage); 
-          throw new Error('Login failed');
+        const errorMessage = await response.text();
+        alert(errorMessage);
+        throw new Error('Login failed');
       }
 
       const contentType = response.headers.get('content-type');
