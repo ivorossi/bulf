@@ -31,9 +31,6 @@
   margin: 8px 0;
 }
 
-
-
-
 .genders-container {
   display: flex;
   justify-content: center;
@@ -126,9 +123,11 @@
   cursor: pointer;
   background: rgb(201, 20, 20);
 }
+
 .close-modal:hover {
   background-color: #6a0f0a;
 }
+
 .home-button {
   margin-right: 10px;
 }
