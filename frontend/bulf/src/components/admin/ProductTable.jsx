@@ -55,6 +55,7 @@ const ProductTable = () => {
 
   const handleEdit = (id) => {
     console.log(`Editando producto con ID: ${id}`);
+
   };
 
   const handleDelete = (id) => {
