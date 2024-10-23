@@ -59,6 +59,7 @@ const ProductTable = () => {
 
   const handleDelete = (id) => {
     console.log(`Eliminando producto con ID: ${id}`);
+    setProducts((prevProducts) => prevProducts.filter(product => product.id !== id));
   };
 
   const handlePrevPage = () => {

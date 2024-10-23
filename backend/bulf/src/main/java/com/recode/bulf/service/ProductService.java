@@ -54,4 +54,13 @@ public class ProductService {
     public Page<Product> getPagedProducts(int page, int size) {
         return productRepository.findAllOrderedByIdDesc(createPageRequest(page, size, "id"));
     }
+
+    public boolean deleteProductById(Long id) {
+        if (productRepository.existsById(id)) {
+            productRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

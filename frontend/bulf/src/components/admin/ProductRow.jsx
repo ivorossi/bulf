@@ -3,6 +3,26 @@ import PropTypes from 'prop-types';
 import './ProductRow.css';
 
 const ProductRow = ({ product, onEdit, onDelete, genderMap, categoryMap, subcategoryMap }) => {
+  const handleDelete = async (id) => {
+    
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      try {
+        const response = await fetch(`http://localhost:8080/api/auth/admin/product/${id}`, {
+          method: 'DELETE',
+        });
+        if (response.ok) {
+          alert('Producto eliminado exitosamente');
+          onDelete(id);
+        } else {
+          alert('Error al eliminar el producto');
+        }
+      } catch (error) {
+        console.error('Error en la solicitud de eliminación:', error);
+        alert('Error en la solicitud de eliminación');
+      }
+    }
+  };
+
   return (
     <tr>
       <td>{product.id}</td>
@@ -20,7 +40,7 @@ const ProductRow = ({ product, onEdit, onDelete, genderMap, categoryMap, subcate
       <td>{subcategoryMap[product.subcategoryId]}</td>
       <td className="button-cell">
         <button onClick={() => onEdit(product.id)}>+/-</button>
-        <button className="delete-button" onClick={() => onDelete(product.id)}>X</button>
+        <button className="delete-button" onClick={() => handleDelete(product.id)}>X</button>
       </td>
     </tr>
   );

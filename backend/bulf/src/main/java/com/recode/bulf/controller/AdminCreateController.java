@@ -53,4 +53,14 @@ public class AdminCreateController {
         Page<Product> products = productService.getPagedProducts(page, size);
         return ResponseEntity.ok(products);
     }
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        boolean isDeleted = productService.deleteProductById(id);
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
