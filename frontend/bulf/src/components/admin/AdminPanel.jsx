@@ -28,12 +28,6 @@ const AdminPanel = () => {
         setIsSubcategoryFormOpen(!isSubcategoryFormOpen);
     };
 
-    const closeModal = () => {
-        setIsProductFormOpen(false);
-        setIsGenderFormOpen(false);
-        setIsCategoryFormOpen(false);
-        setIsSubcategoryFormOpen(false);
-    };
 
     return (
         <div className="admin-panel">
@@ -45,7 +39,6 @@ const AdminPanel = () => {
                 <button className="admin-button" onClick={toggleProductFormModal}>Crear Producto</button>
             </div>
 
-            {/* Modal para Crear Género */}
             <Modal
                 isOpen={isGenderFormOpen}
                 onRequestClose={toggleGenderFormModal}
@@ -54,10 +47,9 @@ const AdminPanel = () => {
                 overlayClassName="modal-overlay"
             >
                 <button onClick={toggleGenderFormModal} className="close-modal">X</button>
-                <GenderForm closeModal={closeModal} />
+                <GenderForm  />
             </Modal>
 
-            {/* Modal para Crear Categoría */}
             <Modal
                 isOpen={isCategoryFormOpen}
                 onRequestClose={toggleCategoryFormModal}
@@ -66,10 +58,9 @@ const AdminPanel = () => {
                 overlayClassName="modal-overlay"
             >
                 <button onClick={toggleCategoryFormModal} className="close-modal">X</button>
-                <CategoryForm closeModal={closeModal} />
+                <CategoryForm  />
             </Modal>
 
-            {/* Modal para Crear Subcategoría */}
             <Modal
                 isOpen={isSubcategoryFormOpen}
                 onRequestClose={toggleSubcategoryFormModal}
@@ -78,10 +69,9 @@ const AdminPanel = () => {
                 overlayClassName="modal-overlay"
             >
                 <button onClick={toggleSubcategoryFormModal} className="close-modal">X</button>
-                <SubcategoryForm closeModal={closeModal} />
+                <SubcategoryForm />
             </Modal>
 
-            {/* Modal para Crear Producto */}
             <Modal
                 isOpen={isProductFormOpen}
                 onRequestClose={toggleProductFormModal}
@@ -90,7 +80,7 @@ const AdminPanel = () => {
                 overlayClassName="modal-overlay"
             >
                 <button onClick={toggleProductFormModal} className="close-modal">X</button>
-                <ProductForm closeModal={closeModal} />
+                <ProductForm  />
             </Modal>
         </div>
     );

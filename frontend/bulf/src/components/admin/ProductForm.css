@@ -1,18 +1,18 @@
 .product-form {
   display: flex;
   flex-wrap: wrap;
-  max-width: 1200px; /* Aumenta el ancho máximo para que entren las dos columnas */
+  max-width: 1200px;
   margin: auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
-  gap: 20px; /* Espacio entre las columnas */
+  gap: 20px;
 }
 
 .column {
-  flex: 1 1 45%; /* Ocupan 45% cada columna, permitiendo espacio entre ellas */
-  min-width: 250px; /* Ancho mínimo */
+  flex: 1 1 45%;
+  min-width: 250px;
 }
 
 .form-group {
@@ -61,12 +61,12 @@ textarea {
 }
 
 @media (max-width: 768px) {
-  /* Para pantallas más pequeñas, las columnas se apilan en una sola */
+
   .product-form {
     flex-direction: column;
   }
 
   .column {
-    flex-basis: 100%; /* Cada columna ocupará todo el ancho en pantallas pequeñas */
+    flex-basis: 100%;
   }
 }
