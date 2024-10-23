@@ -1,5 +1,4 @@
 import AdminPanel from './AdminPanel';
-import ProductForm from './CrearProducForm'
 import ProductTable from './ProductTable';
 
 function AdminView() {
@@ -7,7 +6,6 @@ function AdminView() {
         <div>
             <AdminPanel />
             <ProductTable />
-            <ProductForm />
         </div>
     );
 }

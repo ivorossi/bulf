@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './formproducto.css';
+import './ProductForm.css';
 
 const ProductForm = () => {
   const [genders, setGenders] = useState([]);
