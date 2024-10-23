@@ -6,6 +6,7 @@ function AdminView() {
         <div>
             <AdminPanel />
             <ProductTable />
+            
         </div>
     );
 }

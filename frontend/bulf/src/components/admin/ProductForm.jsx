@@ -112,133 +112,137 @@ const ProductForm = () => {
   };
 
   return (
+
     <form className="product-form" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="name">Nombre del Producto:</label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+      <div className="column">
+        <div className="form-group">
+          <label htmlFor="name">Nombre del Producto:</label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="gender">Género:</label>
+          <select
+            id="gender"
+            value={selectedGender}
+            onChange={handleGenderChange}
+            required
+          >
+            <option value="">Selecciona un género</option>
+            {genders.map((gender) => (
+              <option key={gender.id} value={gender.id}>
+                {gender.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="category">Categoría:</label>
+          <select
+            id="category"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            required
+            disabled={!categories.length}
+          >
+            <option value="">Selecciona una categoría</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="subcategory">Subcategoría:</label>
+          <select
+            id="subcategory"
+            value={selectedSubcategory}
+            onChange={handleSubcategoryChange}
+            required
+            disabled={!subcategories.length}
+          >
+            <option value="">Selecciona una subcategoría</option>
+            {subcategories.map((subcategory) => (
+              <option key={subcategory.id} value={subcategory.id}>
+                {subcategory.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="mainImage">Imagen principal:</label>
+          <input
+            type="text"
+            id="mainImage"
+            value={mainImage}
+            onChange={(e) => setMainImage(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="price">Precio:</label>
+          <input
+            type="number"
+            id="price"
+            value={price}
+            onChange={(e) => setPrice(parseFloat(e.target.value))}
+            required
+          />
+        </div>
+
       </div>
 
-      <div className="form-group">
-        <label htmlFor="gender">Género:</label>
-        <select
-          id="gender"
-          value={selectedGender}
-          onChange={handleGenderChange}
-          required
-        >
-          <option value="">Selecciona un género</option>
-          {genders.map((gender) => (
-            <option key={gender.id} value={gender.id}>
-              {gender.name}
-            </option>
+      <div className="column">
+        <div className="form-group">
+          <label>Imágenes adicionales:</label>
+          {images.map((image, index) => (
+            <div key={index} className="image-input-group">
+              <input
+                type="text"
+                value={image}
+                onChange={(e) => handleImageChange(index, e.target.value)}
+                placeholder="URL de la imagen"
+              />
+            </div>
           ))}
-        </select>
-      </div>
+          <button type="button" onClick={handleAddImage} className="add-image-btn">
+            Agregar otra imagen
+          </button>
+        </div>
+        <div className="form-group">
+          <label htmlFor="description">Descripción:</label>
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+        </div>
 
-      <div className="form-group">
-        <label htmlFor="category">Categoría:</label>
-        <select
-          id="category"
-          value={selectedCategory}
-          onChange={handleCategoryChange}
-          required
-          disabled={!categories.length}
-        >
-          <option value="">Selecciona una categoría</option>
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
+        <div className="form-group">
+          <label htmlFor="stock">Stock:</label>
+          <input
+            type="number"
+            id="stock"
+            value={stock}
+            onChange={(e) => setStock(parseFloat(e.target.value))}
+            required
+          />
+        </div>
       </div>
-
-      <div className="form-group">
-        <label htmlFor="subcategory">Subcategoría:</label>
-        <select
-          id="subcategory"
-          value={selectedSubcategory}
-          onChange={handleSubcategoryChange}
-          required
-          disabled={!subcategories.length}
-        >
-          <option value="">Selecciona una subcategoría</option>
-          {subcategories.map((subcategory) => (
-            <option key={subcategory.id} value={subcategory.id}>
-              {subcategory.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="mainImage">Imagen principal:</label>
-        <input
-          type="text"
-          id="mainImage"
-          value={mainImage}
-          onChange={(e) => setMainImage(e.target.value)}
-          required
-        />
-      </div>
-
-      <div className="form-group">
-        <label>Imágenes adicionales:</label>
-        {images.map((image, index) => (
-          <div key={index} className="image-input-group">
-            <input
-              type="text"
-              value={image}
-              onChange={(e) => handleImageChange(index, e.target.value)}
-              placeholder="URL de la imagen"
-            />
-          </div>
-        ))}
-        <button type="button" onClick={handleAddImage} className="add-image-btn">
-          Agregar otra imagen
-        </button>
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="description">Descripción:</label>
-        <textarea
-          id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="price">Precio:</label>
-        <input
-          type="number"
-          id="price"
-          value={price}
-          onChange={(e) => setPrice(parseFloat(e.target.value))}
-          required
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="stock">Stock:</label>
-        <input
-          type="number"
-          id="stock"
-          value={stock}
-          onChange={(e) => setStock(parseFloat(e.target.value))}
-          required
-        />
-      </div>
-
       <button type="submit" className="submit-btn">Crear Producto</button>
     </form>
+
   );
 };
 
