@@ -6,7 +6,6 @@ const CategoryForm = () => {
     const [genders, setGenders] = useState([]);
     const [selectedGenderId, setSelectedGenderId] = useState('');
 
-    // Obtener la lista de géneros al cargar el componente
     useEffect(() => {
         const fetchGenders = async () => {
             try {
@@ -77,7 +76,6 @@ const CategoryForm = () => {
                     ))}
                 </select>
             </div>
-
             <button type="submit" className="submit-btn">Crear Categoría</button>
         </form>
     );
