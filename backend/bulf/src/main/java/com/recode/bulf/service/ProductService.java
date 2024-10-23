@@ -27,13 +27,14 @@ public class ProductService {
     public Optional<Product> getProductById(Long id) {
         return productRepository.findById(id);
     }
+
     private Pageable createPageRequest(int page, int size, String type) {
         return PageRequest.of(page, size, Sort.by(type).descending());
     }
 
     public Page<ProductCard> getPagedProducts(int page) {
         return productRepository.findAllReducedProducts(
-                createPageRequest(page, 20,"date")
+                createPageRequest(page, 20, "date")
         );
     }
 
@@ -61,6 +62,25 @@ public class ProductService {
             return true;
         } else {
             return false;
+        }
+    }
+
+    @Autowired
+    public Product updateProduct(Long id, Product updatedProduct) {
+        Optional<Product> existingProductOpt = productRepository.findById(id);
+        if (existingProductOpt.isPresent()) {
+            Product existingProduct = existingProductOpt.get();
+            existingProduct.setName(updatedProduct.getName());
+            existingProduct.setPrice(updatedProduct.getPrice());
+            existingProduct.setStock(updatedProduct.getStock());
+            existingProduct.setMainImage(updatedProduct.getMainImage());
+            existingProduct.setImages(updatedProduct.getImages());
+            existingProduct.setGenderId(updatedProduct.getGenderId());
+            existingProduct.setCategoryId(updatedProduct.getCategoryId());
+            existingProduct.setSubcategoryId(updatedProduct.getSubcategoryId());
+            return productRepository.save(existingProduct);
+        } else {
+            return null;
         }
     }
 }

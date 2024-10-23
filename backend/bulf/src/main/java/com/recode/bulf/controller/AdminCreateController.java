@@ -63,4 +63,18 @@ public class AdminCreateController {
         }
     }
 
+    @PutMapping("/product/{id}")
+    public ResponseEntity<Product> updateProduct(
+            @PathVariable Long id,
+            @RequestBody Product updatedProduct) {
+
+        Product product = productService.updateProduct(id, updatedProduct);
+
+        if (product != null) {
+            return ResponseEntity.ok(product);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
