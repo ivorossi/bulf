@@ -1,6 +1,6 @@
 import 'react';
 import PropTypes from 'prop-types';
-import './ProductRow.css'; // Asegúrate de importar el archivo CSS
+import './ProductRow.css';
 
 const ProductRow = ({ product, onEdit, onDelete, genderMap, categoryMap, subcategoryMap }) => {
   return (
