@@ -4,6 +4,8 @@ import ProductTable from './ProductTable';
 function AdminView() {
     return (
         <div>
+
+            
             <ProductTable />
             <ProductForm />
         </div>
