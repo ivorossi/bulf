@@ -76,8 +76,10 @@ const ProductTable = () => {
 
   return (
     <>
+
       <div className="pagination-controls">
-        <label htmlFor="size-select">Elementos por página:</label>
+        <h2 className="admin-title"> Product Listing</h2>
+        <label htmlFor="size-select">Items per page:</label>
         <select id="size-select" value={size} onChange={handleSizeChange}>
           <option value="5">5</option>
           <option value="10">10</option>
@@ -91,15 +93,15 @@ const ProductTable = () => {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nombre</th>
-            <th>Precio</th>
+            <th>Name</th>
+            <th>Price</th>
             <th>Stock</th>
-            <th>Cantidad de Imágenes</th>
+            <th>Images</th>
             <th>Main Image URL</th>
-            <th>Género</th>
-            <th>Categoría</th>
-            <th>Subcategoría</th>
-            <th>Acciones</th>
+            <th>Gender</th>
+            <th>Category</th>
+            <th>Sub-Category</th>
+            <th>Edit / Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -118,10 +120,11 @@ const ProductTable = () => {
       </table>
 
       <div className="pagination-wrapper">
-        <button onClick={handlePrevPage} disabled={page === 0}>Anterior</button>
-        <span>Página {page + 1} de {totalPages}</span>
-        <button onClick={handleNextPage} disabled={page === totalPages - 1}>Siguiente</button>
+        <button onClick={handlePrevPage} disabled={page === 0}>Previous</button>
+        <span className="pagination-info">Page {page + 1} of {totalPages}</span>
+        <button onClick={handleNextPage} disabled={page === totalPages - 1}>Next</button>
       </div>
+
     </>
   );
 };

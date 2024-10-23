@@ -42,10 +42,17 @@
 .pagination-wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin: 20px 0;
+  flex-wrap: nowrap;
 }
 
 .pagination-wrapper button {
   margin: 0 20px;
+  width: 30%;
+  flex-grow: 1;
+}
+
+.pagination-info {
+  margin: 0 10px;
 }
