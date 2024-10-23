@@ -47,7 +47,7 @@ const AdminPanel = () => {
                 overlayClassName="modal-overlay"
             >
                 <button onClick={toggleGenderFormModal} className="close-modal">X</button>
-                <GenderForm  />
+                <GenderForm />
             </Modal>
 
             <Modal
@@ -58,7 +58,7 @@ const AdminPanel = () => {
                 overlayClassName="modal-overlay"
             >
                 <button onClick={toggleCategoryFormModal} className="close-modal">X</button>
-                <CategoryForm  />
+                <CategoryForm />
             </Modal>
 
             <Modal
@@ -80,7 +80,7 @@ const AdminPanel = () => {
                 overlayClassName="modal-overlay"
             >
                 <button onClick={toggleProductFormModal} className="close-modal">X</button>
-                <ProductForm  />
+                <ProductForm />
             </Modal>
         </div>
     );

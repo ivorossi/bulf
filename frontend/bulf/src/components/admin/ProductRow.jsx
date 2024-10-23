@@ -4,7 +4,7 @@ import './ProductRow.css';
 
 const ProductRow = ({ product, onEdit, onDelete, genderMap, categoryMap, subcategoryMap }) => {
   const handleDelete = async (id) => {
-    
+
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
         const response = await fetch(`http://localhost:8080/api/auth/admin/product/${id}`, {

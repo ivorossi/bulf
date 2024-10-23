@@ -26,13 +26,13 @@ const CategoryForm = () => {
             const response = await fetch('http://localhost:8080/api/auth/admin/category', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json', 
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     name,
-                    gender:{
-                        'id':selectedGenderId
-                    } 
+                    gender: {
+                        'id': selectedGenderId
+                    }
                 }),
             });
             if (response.ok) {

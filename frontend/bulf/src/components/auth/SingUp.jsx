@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import './Sing.css';
 import { getApiUrl } from '../../config';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -46,7 +48,8 @@ const RegisterForm = () => {
         data = await response.text();
       }
 
-      console.log('Login successful:', data);
+      alert("Your account was successfully created", data) ;
+      navigate('/home');
     } catch (error) {
       console.error('Login failed:', error.message);
     }
