@@ -5,10 +5,12 @@ import ProductForm from './ProductForm';
 import GenderForm from './GenderForm';
 import CategoryForm from './CategoryForm';
 import SubcategoryForm from './SubcategoryForm';
+import GenderDeleteForm from './GenderDeleteForm.jsx'
 
 const AdminPanel = () => {
     const [isProductFormOpen, setIsProductFormOpen] = useState(false);
     const [isGenderFormOpen, setIsGenderFormOpen] = useState(false);
+    const [isGenderDeleteFormOpen, SetIsGenderDeleteFormOpen] = useState(false);
     const [isCategoryFormOpen, setIsCategoryFormOpen] = useState(false);
     const [isSubcategoryFormOpen, setIsSubcategoryFormOpen] = useState(false);
 
@@ -28,6 +30,21 @@ const AdminPanel = () => {
         setIsSubcategoryFormOpen(!isSubcategoryFormOpen);
     };
 
+    const handleDeleteGender = () => {
+        SetIsGenderDeleteFormOpen(!isGenderDeleteFormOpen)
+        console.log('Borrar Género');
+    };
+
+    const handleDeleteCategory = () => {
+        // Aquí agregarías la lógica para borrar una categoría
+        console.log('Borrar Categoría');
+    };
+
+    const handleDeleteSubcategory = () => {
+        // Aquí agregarías la lógica para borrar una subcategoría
+        console.log('Borrar Subcategoría');
+    };
+
 
     return (
         <div className="admin-panel">
@@ -39,6 +56,12 @@ const AdminPanel = () => {
                 <button className="admin-button" onClick={toggleProductFormModal}>Crear Producto</button>
             </div>
 
+            <div className="admin-delete-buttons">
+                <button className="delete-button" onClick={handleDeleteGender}>Borrar Género</button>
+                <button className="delete-button" onClick={handleDeleteCategory}>Borrar Categoría</button>
+                <button className="delete-button" onClick={handleDeleteSubcategory}>Borrar Subcategoría</button>
+            </div>
+
             <Modal
                 isOpen={isGenderFormOpen}
                 onRequestClose={toggleGenderFormModal}
@@ -48,6 +71,16 @@ const AdminPanel = () => {
             >
                 <button onClick={toggleGenderFormModal} className="close-modal">X</button>
                 <GenderForm />
+            </Modal>
+            <Modal
+                isOpen={isGenderDeleteFormOpen}
+                onRequestClose={handleDeleteGender}
+                contentLabel="GenderDelete Modal"
+                className="modal"
+                overlayClassName="modal-overlay"
+            >
+                <button onClick={handleDeleteGender} className="close-modal">X</button>
+                <GenderDeleteForm />
             </Modal>
 
             <Modal
