@@ -30,8 +30,9 @@ public class AdminService {
         Subcategory defaultSubcategory = new Subcategory();
         defaultSubcategory.setName("None");
         defaultSubcategory.setCategory(category);
+        Category response = categoryRepository.save(category);
         subcategoryRepository.save(defaultSubcategory);
-        return categoryRepository.save(category);
+        return response;
     }
 
     public Subcategory createSubcategory(Subcategory subcategory) {
