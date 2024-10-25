@@ -7,7 +7,7 @@
 
 body {
     background: radial-gradient(circle at top left, #c3c3d6, #537fab, #8740ba);
-    color: #333;
+    color: #1a1717;
   }
 
 .App {
@@ -50,7 +50,7 @@ button:disabled {
 h1,
 h2,
 h3 {
-    color: #1e90ff;
+    color: #10161c;
     margin-bottom: 20px;
 }
 
