@@ -80,8 +80,9 @@ const ProductTable = () => {
     <>
 
       <div className="pagination-controls">
-        <h2 className="admin-title"> Product Listing</h2>
-        <label htmlFor="size-select">Items per page:</label>
+        <br />
+        <br />
+        <h2 className="admin-title"> Product Listing...,  select items per page:</h2>
         <select id="size-select" value={size} onChange={handleSizeChange}>
           <option value="5">5</option>
           <option value="10">10</option>

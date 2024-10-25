@@ -1,5 +1,5 @@
 .natvar {
-  padding: 20px;
+  padding: 5px;
   margin: 0px;
   background: radial-gradient(circle at top left, #ffffff, #8740ba, #537fab);
   color: #333;
@@ -10,12 +10,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 0px;
 }
 
 .logo {
-  width: 50px;
-  height: auto;
+  padding: 0px 10px 0px 10px;
+  width: 180px;
+  height: 80px;
 }
 
 .store-name {
