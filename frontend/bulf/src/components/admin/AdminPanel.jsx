@@ -6,13 +6,17 @@ import GenderForm from './GenderForm';
 import CategoryForm from './CategoryForm';
 import SubcategoryForm from './SubcategoryForm';
 import GenderDeleteForm from './GenderDeleteForm.jsx'
+import CategoryDeleteForm from './CategoryDeleteForm.jsx'
+import SubcategoryDeleteForm from './SubcategoryDeleteForm.jsx'
 
 const AdminPanel = () => {
     const [isProductFormOpen, setIsProductFormOpen] = useState(false);
     const [isGenderFormOpen, setIsGenderFormOpen] = useState(false);
-    const [isGenderDeleteFormOpen, SetIsGenderDeleteFormOpen] = useState(false);
+    const [isGenderDeleteFormOpen, setIsGenderDeleteFormOpen] = useState(false);
     const [isCategoryFormOpen, setIsCategoryFormOpen] = useState(false);
+    const [isCategoryDeleteFormOpen, SetIsCategoryDeleteFormOpen] = useState(false);
     const [isSubcategoryFormOpen, setIsSubcategoryFormOpen] = useState(false);
+    const [isSubcategoryDeleteFormOpen, setIsSubcategoryDeleteFormOpen] = useState(false);
 
     const toggleProductFormModal = () => {
         setIsProductFormOpen(!isProductFormOpen);
@@ -31,17 +35,17 @@ const AdminPanel = () => {
     };
 
     const handleDeleteGender = () => {
-        SetIsGenderDeleteFormOpen(!isGenderDeleteFormOpen)
+        setIsGenderDeleteFormOpen(!isGenderDeleteFormOpen)
         console.log('Borrar Género');
     };
 
     const handleDeleteCategory = () => {
-        // Aquí agregarías la lógica para borrar una categoría
+        SetIsCategoryDeleteFormOpen(!isCategoryDeleteFormOpen)
         console.log('Borrar Categoría');
     };
 
     const handleDeleteSubcategory = () => {
-        // Aquí agregarías la lógica para borrar una subcategoría
+        setIsSubcategoryDeleteFormOpen(!isSubcategoryDeleteFormOpen)
         console.log('Borrar Subcategoría');
     };
 
@@ -95,6 +99,17 @@ const AdminPanel = () => {
             </Modal>
 
             <Modal
+                isOpen={isCategoryDeleteFormOpen}
+                onRequestClose={handleDeleteCategory}
+                contentLabel="CategoryDelete Modal"
+                className="modal"
+                overlayClassName="modal-overlay"
+            >
+                <button onClick={handleDeleteCategory} className="close-modal">X</button>
+                <CategoryDeleteForm />
+            </Modal>
+
+            <Modal
                 isOpen={isSubcategoryFormOpen}
                 onRequestClose={toggleSubcategoryFormModal}
                 contentLabel="Subcategory Modal"
@@ -103,6 +118,17 @@ const AdminPanel = () => {
             >
                 <button onClick={toggleSubcategoryFormModal} className="close-modal">X</button>
                 <SubcategoryForm />
+            </Modal>
+
+            <Modal
+                isOpen={isSubcategoryDeleteFormOpen}
+                onRequestClose={handleDeleteSubcategory}
+                contentLabel="SubcategoryDelete Modal"
+                className="modal"
+                overlayClassName="modal-overlay"
+            >
+                <button onClick={handleDeleteSubcategory} className="close-modal">X</button>
+                <SubcategoryDeleteForm />
             </Modal>
 
             <Modal

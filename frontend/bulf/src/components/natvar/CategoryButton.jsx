@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
-import './CategoryButton.css';
 import { ProductFilterContext } from '../product/ProductFilterContext';
 
 const CategoryButton = ({ category }) => {
