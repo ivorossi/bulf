@@ -51,7 +51,7 @@ const AdminPanel = () => {
 
 
     return (
-        <div className="admin-panel">
+        <div >
             <h1 className="admin-title">Admin Panel</h1>
             <div className="admin-buttons">
                 <button className="admin-button" onClick={toggleGenderFormModal}>Crear Género</button>

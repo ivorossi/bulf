@@ -40,10 +40,14 @@
   width: 50%;
   margin-bottom: 20px;
 }
-
+.cien {
+width: 100%;
+}
 .gender-button {
+  width: 100%;
+  padding: 12px;
+  margin: 0px;
   position: relative;
-  padding: 20px;
   background-color: #8239a6;
   color: #fff;
   border: none;
@@ -107,7 +111,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 20px;
-  background-color: #fff;
+  background: radial-gradient(circle at top left, #8740ba, #ffffff, #537fab);
   border-radius: 16px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
   z-index: 1000;
