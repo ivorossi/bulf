@@ -29,7 +29,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(columnDefinition = "boolean default true")
+    @Column(columnDefinition = "boolean default false")
     private boolean isAdmin;
 
     @OneToMany(mappedBy = "user")

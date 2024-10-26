@@ -40,11 +40,11 @@ const LoginForm = ({ closeModal }) => {
       }
       const data = await response.json()
       login(data.access_token);
+      navigate('/home');
     } catch (error) {
       console.error('Login failed:', error.message);
     }
-    navigate('/home');
-
+    closeModal();
   };
 
   const handleSignUpClick = () => {
