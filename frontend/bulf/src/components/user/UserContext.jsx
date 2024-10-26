@@ -6,32 +6,32 @@ import jwt_decode from 'jwt-decode';
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    const token = Cookies.get('jwt');
-    return token ? jwt_decode(token) : null;
-  });
+    const [user, setUser] = useState(() => {
+        const token = Cookies.get('jwt');
+        return token ? jwt_decode(token) : null;
+    });
 
-  const login = (token) => {
-    Cookies.set('jwt', token);
-    setUser(jwt_decode(token));
-  };
+    const login = (token) => {
+        Cookies.set('jwt', token);
+        setUser(jwt_decode(token));
+    };
 
-  const logout = () => {
-    Cookies.remove('jwt');
-    setUser(null);
-  };
+    const logout = () => {
+        Cookies.remove('jwt');
+        setUser(null);
+    };
 
-  return (
-    <UserContext.Provider value={{ user, login, logout }}>
-      {children}
-    </UserContext.Provider>
-  );
+    return (
+        <UserContext.Provider value={{ user, login, logout }}>
+            {children}
+        </UserContext.Provider>
+    );
 };
 
 UserProvider.propTypes = {
-  children: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
 };
 
 export const useUser = () => {
-  return useContext(UserContext);
+    return useContext(UserContext);
 };

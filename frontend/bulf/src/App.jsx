@@ -7,7 +7,7 @@ import ProductView from './components/product/ProductView';
 import { ProductFilterProvider } from './components/product/ProductFilterContext';
 import './App.css';
 import { UserProvider } from './components/user/UserContext';
-import ProtectedRoute from './components/user/ProtectedRoute'; // Ajusta esta ruta
+import ProtectedRoute from './components/user/ProtectedRoute';
 
 function App() {
   return (
@@ -20,13 +20,13 @@ function App() {
               <Route path="/home" element={<ProductsList />} />
               <Route path="/item/:id" element={<ProductView />} />
               <Route path="/signup" element={<RegisterForm />} />
-              <Route 
-                path="/admin" 
+              <Route
+                path="/admin"
                 element={
                   <ProtectedRoute>
                     <AdminView />
                   </ProtectedRoute>
-                } 
+                }
               />
             </Routes>
           </ProductFilterProvider>

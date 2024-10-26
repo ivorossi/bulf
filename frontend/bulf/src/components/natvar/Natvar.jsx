@@ -78,7 +78,7 @@ function NatVar() {
         )}
 
         {user ? (
-          <ProfileButton />
+          <ProfileButton className="home-button" />
         ) : (
           <button className="home-button" onClick={toggleLoginModal}>Sing In</button>
         )}
