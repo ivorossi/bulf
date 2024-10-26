@@ -6,21 +6,23 @@ import ProductsList from './components/product/ProductsList'
 import ProductView from './components/product/ProductView';
 import { ProductFilterProvider } from './components/product/ProductFilterContext';
 import './App.css';
-
+import { UserProvider } from './components/user/UserContext';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <ProductFilterProvider>
-          <NatVar />
-          <Routes>
-            <Route path="/home" element={<ProductsList />} />
-            <Route path="/item/:id" element={<ProductView />} />
-            <Route path="/signup" element={<RegisterForm />} />
-            <Route path="/admin" element={<AdminView />} />
-          </Routes>
-        </ProductFilterProvider>
+        <UserProvider>
+          <ProductFilterProvider>
+            <NatVar />
+            <Routes>
+              <Route path="/home" element={<ProductsList />} />
+              <Route path="/item/:id" element={<ProductView />} />
+              <Route path="/signup" element={<RegisterForm />} />
+              <Route path="/admin" element={<AdminView />} />
+            </Routes>
+          </ProductFilterProvider>
+        </UserProvider>
       </div>
     </Router>
 
