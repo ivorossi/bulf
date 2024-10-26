@@ -39,11 +39,12 @@ const LoginForm = ({ closeModal }) => {
         throw new Error('Login failed');
       }
       const data = await response.json()
-
       login(data.access_token);
     } catch (error) {
       console.error('Login failed:', error.message);
     }
+    navigate('/home');
+
   };
 
   const handleSignUpClick = () => {
