@@ -36,7 +36,7 @@ const ProfileButton = () => {
           </button>
           {isMenuOpen && (
             <div className="dropdown-content">
-              <button onClick={() => { setIsCartModalOpen(true); setIsMenuOpen(false); }} className="cart-button">Cart</button>
+              <button onClick={() => { setIsCartModalOpen(true); setIsMenuOpen(false); }} className="logout-button">Cart</button>
               <button onClick={() => { setIsLogoutModalOpen(true); setIsMenuOpen(false); }} className="logout-button">Logout</button>
             </div>
           )}

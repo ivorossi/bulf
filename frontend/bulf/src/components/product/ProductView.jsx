@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../user/CartContext'; 
+import { useUser } from '../user/UserContext';
 import './ProductView.css';
 
 const ProductView = () => {
+  const { user } = useUser();
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [genders, setGenders] = useState([]);
@@ -78,8 +80,12 @@ const ProductView = () => {
     product.subcategoryId
   );
   const handleAddToCart = () => {
-    if (product) {
-      addToCart(product);
+    if (user) {
+      if (product) {
+        addToCart(product);
+      }
+    } else {
+      alert('Debes iniciar sesión para agregar productos al carrito.');
     }
   };
 
