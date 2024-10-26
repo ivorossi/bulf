@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import LoginForm from '../auth/SingIn';
 import Modal from 'react-modal';
 import { useUser } from '../user/UserContext';
-import ProfileButton from './ProfileButton'
+import ProfileButton from '../user/ProfileButton'
 
 Modal.setAppElement('#root');
 

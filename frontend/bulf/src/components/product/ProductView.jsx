@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useCart } from '../user/CartContext'; 
 import './ProductView.css';
 
 const ProductView = () => {
@@ -8,6 +9,7 @@ const ProductView = () => {
   const [genders, setGenders] = useState([]);
   const [activeImage, setActiveImage] = useState('');
   const [deliveryDate, setDeliveryDate] = useState('');
+  const { addToCart } = useCart(); 
 
   useEffect(() => {
     const calculateDeliveryDate = () => {
@@ -39,7 +41,6 @@ const ProductView = () => {
     fetchProduct();
   }, [id]);
 
-  // Fetch de géneros, categorías y subcategorías
   useEffect(() => {
     const fetchGenders = async () => {
       try {
@@ -54,7 +55,6 @@ const ProductView = () => {
     fetchGenders();
   }, []);
 
-  // Mapeo para obtener los nombres de género, categoría y subcategoría
   const getCategoryAndSubcategory = (genderId, categoryId, subcategoryId) => {
     const gender = genders.find((g) => g.id === genderId);
     if (!gender) return { genderName: 'N/A', categoryName: 'N/A', subcategoryName: 'N/A' };
@@ -72,21 +72,22 @@ const ProductView = () => {
 
   if (!product || genders.length === 0) return <div>Cargando...</div>;
 
-  // Obtener los nombres de género, categoría y subcategoría
   const { genderName, categoryName, subcategoryName } = getCategoryAndSubcategory(
     product.genderId,
     product.categoryId,
     product.subcategoryId
   );
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart(product);
+    }
+  };
 
   return (
-
     <div className="product-view">
-
       <div className="product-container">
         <div className="image-section">
           <img src={activeImage} alt={product.name} className="main-image" />
-
           <div className="thumbnail-carousel">
             <img
               src={product.mainImage}
@@ -114,9 +115,7 @@ const ProductView = () => {
           </div>
           <div className="price-section">
             <span className="current-price">Price: {product.price.toFixed(2)} $</span>
-
           </div>
-
           <div className="publish-date-section">
             <p><strong>Fecha de publicación:</strong> {new Date(product.date).toLocaleDateString()}</p>
           </div>
@@ -127,17 +126,15 @@ const ProductView = () => {
             <p><strong>Sub-category:</strong> {subcategoryName}</p>
             <br />
           </div>
-
           <div className="additional-details">
             <p className="shipping-info">Envío: ARS 9,938.09</p>
             <p className="delivery-info">Entrega estimada: {deliveryDate}</p>
             <p className="security-info">Seguridad y Privacidad: Pagos seguros, sin compartir datos con terceros.</p>
           </div>
           <p><strong>Stock:</strong> {product.stock}</p>
-
           <div className="buttons-section">
             <button className="buy-button">Comprar Ahora</button>
-            <button className="add-to-cart-button">Agregar al Carrito</button>
+            <button className="add-to-cart-button" onClick={handleAddToCart}>Agregar al Carrito</button> {/* Añadir el manejador */}
           </div>
         </div>
       </div>

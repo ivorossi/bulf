@@ -8,28 +8,31 @@ import { ProductFilterProvider } from './components/product/ProductFilterContext
 import './App.css';
 import { UserProvider } from './components/user/UserContext';
 import ProtectedRoute from './components/user/ProtectedRoute';
+import { CartProvider } from './components/user/CartContext';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <UserProvider>
-          <ProductFilterProvider>
-            <NatVar />
-            <Routes>
-              <Route path="/home" element={<ProductsList />} />
-              <Route path="/item/:id" element={<ProductView />} />
-              <Route path="/signup" element={<RegisterForm />} />
-              <Route
-                path="/admin"
-                element={
-                  <ProtectedRoute>
-                    <AdminView />
-                  </ProtectedRoute>
-                }
-              />
-            </Routes>
-          </ProductFilterProvider>
+          <CartProvider>
+            <ProductFilterProvider>
+              <NatVar />
+              <Routes>
+                <Route path="/home" element={<ProductsList />} />
+                <Route path="/item/:id" element={<ProductView />} />
+                <Route path="/signup" element={<RegisterForm />} />
+                <Route
+                  path="/admin"
+                  element={
+                    <ProtectedRoute>
+                      <AdminView />
+                    </ProtectedRoute>
+                  }
+                />
+              </Routes>
+            </ProductFilterProvider>
+          </CartProvider>
         </UserProvider>
       </div>
     </Router>
