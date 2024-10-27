@@ -34,4 +34,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
+
+    public boolean purchase(List<Product> products) {
+        //logica de mercado libre
+        return true;
+    }
 }

@@ -117,7 +117,7 @@ public class AuthService {
 
             final User user = userRepository.findByEmail(userEmail)
                     .orElseThrow(() -> new IllegalArgumentException("User not found with email: " + userEmail));
-            final boolean isTokenValid = jwtService.isTokenValid(refreshToken, user);
+            final boolean isTokenValid = jwtService.isTokenValid(refreshToken, user.getEmail());
             if (!isTokenValid) {
                 throw new IllegalArgumentException("Invalid refresh token");
             }
