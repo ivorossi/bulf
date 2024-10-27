@@ -7,13 +7,10 @@ import com.recode.bulf.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/auth/user")
 public class UserController {
 
     @Autowired
@@ -21,9 +18,13 @@ public class UserController {
     @Autowired
     private JwtService jwtService;
 
-    @PostMapping("purchase")
-    public ResponseEntity<?> createPurchase(@RequestBody PurchaseRequest purchaseRequest) {
-        if (jwtService.isTokenValid(purchaseRequest.token(), purchaseRequest.email())) {
+    @PostMapping("/purchase")
+    public ResponseEntity<?> createPurchase(
+            @RequestBody PurchaseRequest purchaseRequest,
+            @RequestHeader("Authorization") final String authHeader) {
+
+        String token = authHeader.replace("Bearer ", "");
+        if (!jwtService.isTokenValid(token, purchaseRequest.email())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token or email");
         }
         boolean success = userService.processPurchase(purchaseRequest.productIds(), purchaseRequest.email());

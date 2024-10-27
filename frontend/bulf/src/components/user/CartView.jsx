@@ -1,11 +1,44 @@
 import { useCart } from './CartContext';
+import { useUser } from './UserContext';
 import './CartView.css';
 
 const CartView = () => {
   const { cartItems, removeFromCart, addToCart, decreaseQuantity } = useCart();
+  const { user, token } = useUser();
 
-  const handlePurchase = () => {
-    alert("Thank you for your purchase!");
+  const handlePurchase = async () => {
+    if (!user) {
+      alert("You must be logged in to make a purchase.");
+      return;
+    }
+
+    const productIds = cartItems.map(item => item.id);
+    const purchaseData = {
+      email: user.email,
+      productIds,
+
+    };
+
+    try {
+      const response = await fetch('http://localhost:8080/api/auth/user/purchase', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(purchaseData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Purchase failed');
+      }
+      console.log(response.text)
+
+      alert("Thank you for your purchase!");
+    } catch (error) {
+      console.error("Error during purchase:", error);
+      alert("There was an issue with your purchase. Please try again.");
+    }
   };
 
   return (
