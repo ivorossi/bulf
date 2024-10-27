@@ -12,12 +12,16 @@ const CartView = () => {
       return;
     }
 
-    const productIds = cartItems.map(item => item.id);
+    const productData = cartItems.map(item => ({
+      id: item.id,
+      quantity: item.quantity
+  }));
     const purchaseData = {
       email: user.email,
-      productIds,
+      products: productData,
 
     };
+    console.log(productData)
 
     try {
       const response = await fetch('http://localhost:8080/api/auth/user/purchase', {

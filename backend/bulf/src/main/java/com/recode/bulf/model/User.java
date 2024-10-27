@@ -37,6 +37,9 @@ public class User {
 
     public boolean purchase(List<Product> products) {
         //logica de mercado libre
+
         return true;
     }
+    
+    
 }

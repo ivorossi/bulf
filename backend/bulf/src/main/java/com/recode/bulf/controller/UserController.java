@@ -27,7 +27,7 @@ public class UserController {
         if (!jwtService.isTokenValid(token, purchaseRequest.email())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token or email");
         }
-        boolean success = userService.processPurchase(purchaseRequest.productIds(), purchaseRequest.email());
+        boolean success = userService.processPurchase(purchaseRequest.products(), purchaseRequest.email());
         return success ? ResponseEntity.ok("Purchase completed successfully")
                 : ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing purchase");
     }

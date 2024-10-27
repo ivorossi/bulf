@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useCart } from '../user/CartContext'; 
+import { useCart } from '../user/CartContext';
 import { useUser } from '../user/UserContext';
 import './ProductView.css';
 
 const ProductView = () => {
-  const { user } = useUser();
+  const { user, token } = useUser();
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [genders, setGenders] = useState([]);
   const [activeImage, setActiveImage] = useState('');
   const [deliveryDate, setDeliveryDate] = useState('');
-  const { addToCart } = useCart(); 
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const calculateDeliveryDate = () => {
@@ -89,6 +89,41 @@ const ProductView = () => {
     }
   };
 
+  const handlePurchase = async () => {
+    if (!user) {
+      alert("You must be logged in to make a purchase.");
+      return;
+    }
+    const purchaseData = {
+      email: user.email,
+      products:[{
+        id: product.id,
+        quantity: 1
+      }]
+    };
+
+    try {
+      const response = await fetch('http://localhost:8080/api/auth/user/purchase', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(purchaseData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Purchase failed');
+      }
+      console.log(response.text)
+
+      alert("Thank you for your purchase!");
+    } catch (error) {
+      console.error("Error during purchase:", error);
+      alert("There was an issue with your purchase. Please try again.");
+    }
+  };
+
   return (
     <div className="product-view">
       <div className="product-container">
@@ -139,8 +174,8 @@ const ProductView = () => {
           </div>
           <p><strong>Stock:</strong> {product.stock}</p>
           <div className="buttons-section">
-            <button className="buy-button">Comprar Ahora</button>
-            <button className="add-to-cart-button" onClick={handleAddToCart}>Agregar al Carrito</button> {/* Añadir el manejador */}
+            <button onClick={handlePurchase} className="buy-button">Buy now</button>
+            <button className="add-to-cart-button" onClick={handleAddToCart}>Add to cart</button>
           </div>
         </div>
       </div>
