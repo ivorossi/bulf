@@ -34,12 +34,37 @@ public class MercadoPagoService {
         List<PreferenceItemRequest> items = new ArrayList<>();
         for (ProductPurchase productPurchase : productsPurchase) {
             Product product = productRepository.findById(productPurchase.id()).get();
-            PreferenceItemRequest itemRequest = PreferenceItemRequest.builder().id(String.valueOf(product.getId())).title(product.getName()).description(product.getDescription()).quantity(productPurchase.quantity()).currencyId("ARG").unitPrice(new BigDecimal(product.getPrice())).build();
+            PreferenceItemRequest itemRequest = PreferenceItemRequest
+                    .builder()
+                    .id(String.valueOf(product.getId()))
+                    .title(product.getName())
+                    .description(product.getDescription())
+                    .quantity(productPurchase.quantity())
+                    .currencyId("ARG")
+                    .unitPrice(new BigDecimal(product.getPrice()))
+                    .build();
             items.add(itemRequest);
         }
-        PreferencePayerRequest payer = PreferencePayerRequest.builder().name(user.getUsername()).email(user.getEmail()).build();
-        PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder().failure("https://github.com/ivorossi").success("http://localhost:5173/home").pending("https://jkanime.net").build();
-        PreferenceRequest preferenceRequest = PreferenceRequest.builder().items(items).payer(payer).backUrls(backUrls).autoReturn("approved").notificationUrl("https://www.youtube.com/").build();
+        PreferencePayerRequest payer = PreferencePayerRequest
+                .builder()
+                .name(user.getUsername())
+                .email(user.getEmail())
+                .build();
+        System.out.println(payer.toString());
+        PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.
+                builder()
+                .failure("http://localhost:8080/api/auth/user/mercado-pago")
+                .success("http://localhost:8080/api/auth/user/mercado-pago")
+                .pending("http://localhost:8080/api/auth/user/mercado-pago")
+                .build();
+        PreferenceRequest preferenceRequest = PreferenceRequest
+                .builder()
+                .items(items)
+                .payer(payer)
+                .backUrls(backUrls)
+                .autoReturn("approved")
+                .notificationUrl("https://www.youtube.com/")
+                .build();
         return preferenceRequest;
     }
 }
