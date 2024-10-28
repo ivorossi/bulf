@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../user/CartContext';
 import { useUser } from '../user/UserContext';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+
 import './ProductView.css';
 
 const ProductView = () => {
@@ -11,7 +13,12 @@ const ProductView = () => {
   const [genders, setGenders] = useState([]);
   const [activeImage, setActiveImage] = useState('');
   const [deliveryDate, setDeliveryDate] = useState('');
+  const [preferenceId, setPreferenceId] = useState(null); 
   const { addToCart } = useCart();
+
+  useEffect(() => {
+    initMercadoPago('TEST-e9c97fa5-19b5-4cd1-a17d-ff5623239ca1', { locale: 'es-AR' });
+  }, []);
 
   useEffect(() => {
     const calculateDeliveryDate = () => {
@@ -25,6 +32,7 @@ const ProductView = () => {
 
     calculateDeliveryDate();
   }, []);
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -79,6 +87,7 @@ const ProductView = () => {
     product.categoryId,
     product.subcategoryId
   );
+
   const handleAddToCart = () => {
     if (user) {
       if (product) {
@@ -96,7 +105,7 @@ const ProductView = () => {
     }
     const purchaseData = {
       email: user.email,
-      products:[{
+      products: [{
         id: product.id,
         quantity: 1
       }]
@@ -115,9 +124,10 @@ const ProductView = () => {
       if (!response.ok) {
         throw new Error('Purchase failed');
       }
-      console.log(response.text)
 
-      alert("Thank you for your purchase!");
+      const preferenceId = await response.text();
+      setPreferenceId(preferenceId); // Establece el preferenceId para mostrar el componente Wallet
+
     } catch (error) {
       console.error("Error during purchase:", error);
       alert("There was an issue with your purchase. Please try again.");
@@ -177,6 +187,11 @@ const ProductView = () => {
             <button onClick={handlePurchase} className="buy-button">Buy now</button>
             <button className="add-to-cart-button" onClick={handleAddToCart}>Add to cart</button>
           </div>
+          {preferenceId && (
+            <div className="wallet-container">
+              <Wallet initialization={{ preferenceId }} /> {/* Muestra el componente Wallet */}
+            </div>
+          )}
         </div>
       </div>
     </div>

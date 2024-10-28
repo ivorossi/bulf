@@ -1,6 +1,16 @@
 package com.recode.bulf.service;
 
+import com.mercadopago.client.preference.*;
+import com.mercadopago.exceptions.MPApiException;
+import com.mercadopago.exceptions.MPException;
+import com.mercadopago.resources.common.Address;
+import com.mercadopago.resources.common.Identification;
+import com.mercadopago.resources.common.Phone;
+import com.mercadopago.resources.preference.Preference;
+import com.mercadopago.resources.preference.PreferenceBackUrls;
+import com.mercadopago.resources.preference.PreferencePayer;
 import com.recode.bulf.dto.ProductCard;
+import com.recode.bulf.dto.ProductPurchase;
 import com.recode.bulf.model.Product;
 import com.recode.bulf.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +19,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import com.mercadopago.MercadoPagoConfig;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -80,4 +94,5 @@ public class ProductService {
             return null;
         }
     }
+
 }
