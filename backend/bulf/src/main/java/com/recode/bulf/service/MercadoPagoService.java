@@ -8,7 +8,7 @@ import com.recode.bulf.model.Product;
 import com.recode.bulf.model.User;
 import com.recode.bulf.repository.ProductRepository;
 import com.recode.bulf.repository.UserRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,16 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MercadoPagoService {
     @Autowired
-
     private final UserRepository userRepository;
     @Autowired
     private final ProductRepository productRepository;
     @Value("${application.security.mercado-pago.token}")
     private String mercadoPagoToken;
-
 
     public PreferenceRequest processesPay(PurchaseRequest purchaseRequest) {
         List<ProductPurchase> productsPurchase = purchaseRequest.products();

@@ -33,7 +33,7 @@ public class UserController {
         if (!jwtService.isTokenValid(token, purchaseRequest.email())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token or email");
         }
-        boolean success = userService.processPurchase(purchaseRequest.products(), purchaseRequest.email());
+        userService.processPurchase(purchaseRequest.products(), purchaseRequest.email());
         PreferenceClient client = new PreferenceClient();
         try {
             Preference preference = client.create(mercadoPagoService.processesPay(purchaseRequest));
