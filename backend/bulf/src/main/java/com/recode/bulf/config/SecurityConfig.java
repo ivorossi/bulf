@@ -17,9 +17,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -37,39 +34,17 @@ public class SecurityConfig implements WebMvcConfigurer {
 
     @Bean
     public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
-        http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req ->
-                        req.requestMatchers("/api/**")
-                                .permitAll()
-                                .anyRequest()
-                                .authenticated()
-                )
-                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
-                .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .logout(logout ->
-                        logout.logoutUrl("/auth/logout")
-                                .addLogoutHandler(this::logout)
-                                .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-                )
-        ;
+        http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(req -> req.requestMatchers("/api/**").permitAll().anyRequest().authenticated()).sessionManagement(session -> session.sessionCreationPolicy(STATELESS)).authenticationProvider(authenticationProvider).addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class).logout(logout -> logout.logoutUrl("/auth/logout").addLogoutHandler(this::logout).logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext()));
         return http.build();
     }
 
-    private void logout(
-            final HttpServletRequest request, final HttpServletResponse response,
-            final Authentication authentication
-    ) {
-
+    private void logout(final HttpServletRequest request, final HttpServletResponse response, final Authentication authentication) {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return;
         }
-
         final String jwt = authHeader.substring(7);
-        final Token storedToken = tokenRepository.findByToken(jwt)
-                .orElse(null);
+        final Token storedToken = tokenRepository.findByToken(jwt).orElse(null);
         if (storedToken != null) {
             storedToken.setIsExpired(true);
             storedToken.setIsRevoked(true);
@@ -77,13 +52,10 @@ public class SecurityConfig implements WebMvcConfigurer {
             SecurityContextHolder.clearContext();
         }
     }
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5173")
-                .allowedMethods("*")
-                .allowedHeaders("*")
-                .allowCredentials(true);
+        registry.addMapping("/**").allowedOrigins("http://localhost:5173").allowedMethods("*").allowedHeaders("*").allowCredentials(true);
     }
 
 }

@@ -11,9 +11,9 @@ const CartView = () => {
   const [preferenceId, setPreferenceId] = useState(null);
 
   useEffect(() => {
-    initMercadoPago('TEST-e9c97fa5-19b5-4cd1-a17d-ff5623239ca1', { locale: 'es-AR' });
+    initMercadoPago('TEST-66ca14b3-4f75-4369-801a-e96c54b1f2d7', { locale: 'es-AR' });
   }, []);
-  
+
   const handlePurchase = async () => {
     if (!user) {
       alert("You must be logged in to make a purchase.");

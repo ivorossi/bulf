@@ -18,19 +18,18 @@ public class UserService {
     @Autowired
     private final UserRepository userRepository;
     @Autowired
-    private  final ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public boolean processPurchase(List<ProductPurchase> productsPurchase, String email) {
         User user = userRepository.findByEmail(email).get();
         List<Product> products = new ArrayList<>();
-        for(ProductPurchase productPurchase: productsPurchase){
+        for (ProductPurchase productPurchase : productsPurchase) {
             Product product = productRepository.findById(productPurchase.id()).get();
-            for (int i = 0; i < productPurchase.quantity(); i++){
+            for (int i = 0; i < productPurchase.quantity(); i++) {
                 products.add(product);
             }
         }
-
-        for (Product product: products){
+        for (Product product : products) {
             product.purchase();
         }
         productRepository.saveAll(products);

@@ -7,7 +7,6 @@ import com.mercadopago.resources.preference.Preference;
 import com.recode.bulf.dto.PurchaseRequest;
 import com.recode.bulf.service.JwtService;
 import com.recode.bulf.service.MercadoPagoService;
-import com.recode.bulf.service.ProductService;
 import com.recode.bulf.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +27,7 @@ public class UserController {
     private final MercadoPagoService mercadoPagoService;
 
     @PostMapping("/purchase")
-    public ResponseEntity<String> createPurchase(
-            @RequestBody PurchaseRequest purchaseRequest,
-            @RequestHeader("Authorization") final String authHeader) {
+    public ResponseEntity<String> createPurchase(@RequestBody PurchaseRequest purchaseRequest, @RequestHeader("Authorization") final String authHeader) {
 
         String token = authHeader.replace("Bearer ", "");
         if (!jwtService.isTokenValid(token, purchaseRequest.email())) {
