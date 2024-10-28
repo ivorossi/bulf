@@ -1,11 +1,19 @@
+import { useEffect, useState } from 'react';
 import { useCart } from './CartContext';
 import { useUser } from './UserContext';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+
 import './CartView.css';
 
 const CartView = () => {
   const { cartItems, removeFromCart, addToCart, decreaseQuantity } = useCart();
   const { user, token } = useUser();
+  const [preferenceId, setPreferenceId] = useState(null);
 
+  useEffect(() => {
+    initMercadoPago('TEST-e9c97fa5-19b5-4cd1-a17d-ff5623239ca1', { locale: 'es-AR' });
+  }, []);
+  
   const handlePurchase = async () => {
     if (!user) {
       alert("You must be logged in to make a purchase.");
@@ -15,13 +23,12 @@ const CartView = () => {
     const productData = cartItems.map(item => ({
       id: item.id,
       quantity: item.quantity
-  }));
+    }));
+
     const purchaseData = {
       email: user.email,
       products: productData,
-
     };
-    console.log(productData)
 
     try {
       const response = await fetch('http://localhost:8080/api/auth/user/purchase', {
@@ -36,9 +43,11 @@ const CartView = () => {
       if (!response.ok) {
         throw new Error('Purchase failed');
       }
-      console.log(response.text)
 
-      alert("Thank you for your purchase!");
+      const preferenceId = await response.text();
+      setPreferenceId(preferenceId); // Establece el preferenceId para mostrar el componente Wallet
+      
+
     } catch (error) {
       console.error("Error during purchase:", error);
       alert("There was an issue with your purchase. Please try again.");
@@ -83,6 +92,11 @@ const CartView = () => {
           <div className="purchase-section">
             <button onClick={handlePurchase} className="purchase-button">Buy Now</button>
           </div>
+          {preferenceId && (
+            <div className="wallet-container">
+              <Wallet initialization={{ preferenceId }} /> 
+            </div>
+          )}
         </>
       )}
     </div>

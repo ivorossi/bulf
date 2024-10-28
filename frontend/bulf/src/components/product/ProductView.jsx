@@ -13,7 +13,7 @@ const ProductView = () => {
   const [genders, setGenders] = useState([]);
   const [activeImage, setActiveImage] = useState('');
   const [deliveryDate, setDeliveryDate] = useState('');
-  const [preferenceId, setPreferenceId] = useState(null); 
+  const [preferenceId, setPreferenceId] = useState(null);
   const { addToCart } = useCart();
 
   useEffect(() => {
