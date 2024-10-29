@@ -7,7 +7,7 @@ import com.mercadopago.resources.preference.Preference;
 import com.recode.bulf.dto.PurchaseRequest;
 import com.recode.bulf.service.JwtService;
 import com.recode.bulf.service.MercadoPagoService;
-import com.recode.bulf.service.UserService;
+import com.recode.bulf.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,28 +19,25 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/api/auth/user")
 @AllArgsConstructor
 public class UserController {
-
-    @Autowired
-    private UserService userService;
     @Autowired
     private JwtService jwtService;
     @Autowired
     private final MercadoPagoService mercadoPagoService;
+    @Autowired
+    private final ProductService productService;
 
     @PostMapping("/purchase")
     public ResponseEntity<String> createPurchase(@RequestBody PurchaseRequest purchaseRequest, @RequestHeader("Authorization") final String authHeader) {
-
         String token = authHeader.replace("Bearer ", "");
         if (!jwtService.isTokenValid(token, purchaseRequest.email())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token or email");
         }
-        userService.processPurchase(purchaseRequest.products(), purchaseRequest.email());
+        if (productService.isNotStockAvailable(purchaseRequest.products())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Insufficient stock for one or more products");
+        }
         PreferenceClient client = new PreferenceClient();
         try {
             Preference preference = client.create(mercadoPagoService.processesPay(purchaseRequest));
-            System.out.println(preference.getId());
-            System.out.println(preference.getPayer().getEmail());
-
             return ResponseEntity.ok(preference.getId());
         } catch (MPException e) {
             return ResponseEntity.status(500).body("Error payments preference");
@@ -50,14 +47,9 @@ public class UserController {
     }
 
     @GetMapping("/mercado-pago")
-    public RedirectView receiveMercadoPagoResponse(
-            @RequestParam Long payment_id
-    ) {
-        System.out.println("Payment ID: " + payment_id);
-        mercadoPagoService.createPurchase(payment_id );
-
+    public RedirectView receiveMercadoPagoResponse(@RequestParam Long payment_id) {
+        mercadoPagoService.createPurchase(payment_id);
         return new RedirectView("http://localhost:5173/succes-purchase");
     }
-
 
 }

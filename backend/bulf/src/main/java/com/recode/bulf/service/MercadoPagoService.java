@@ -59,7 +59,9 @@ public class MercadoPagoService {
                     Product product = productRepository.findById(item.path("id").asLong()).get();
                     for (int i = 0; i < item.path("quantity").asInt(); i++) {
                         products.add(product);
+                        product.purchase();
                     }
+                    productRepository.save(product);
                 }
                 purchase.setPaymentId(jsonNode.path("id").asLong());
                 purchase.setStatus(jsonNode.path("status").asText());
