@@ -50,6 +50,10 @@ public class PurchaseService {
          }
          return response;
     }
+
+    public List<Purchase> getAll() {
+        return purchaseRepository.findAll();
+    }
 }
 
 
