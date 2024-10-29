@@ -117,8 +117,4 @@ public class MercadoPagoService {
                 .build();
         return preferenceRequest;
     }
-
-
-
-
 }
