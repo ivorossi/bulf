@@ -8,5 +8,7 @@ public record PurchaseDTO(
         Double totalCost,
         String status,
         Integer userId,
+        String userEmail,
+        String userName,
         List<ProductPurchaseDTO> products) {
 }

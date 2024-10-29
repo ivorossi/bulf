@@ -57,7 +57,7 @@ function PurchaseTable() {
                                 ))}
                             </ul>
                         </td>
-                        <td className="total-cost">${purchase.cost.toFixed(2)}</td>
+                        <td className="total-cost">${purchase.totalCost.toFixed(2)}</td>
                     </tr>
                 ))}
             </tbody>

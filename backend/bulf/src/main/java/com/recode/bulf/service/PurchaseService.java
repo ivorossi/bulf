@@ -53,6 +53,8 @@ public class PurchaseService {
                             purchase.getTotalCost(),
                             purchase.getStatus(),
                             purchase.getUser().getId(),
+                            purchase.getUser().getEmail(),
+                            purchase.getUser().getUsername(),
                             productsResponse
                     )
             );
