@@ -105,7 +105,7 @@ public class MercadoPagoService {
         System.out.println(payer.toString());
         PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.
                 builder()
-                .failure("http://localhost:8080/api/auth/user/mercado-pago")
+                .failure("http://localhost:5173/home")
                 .success("http://localhost:8080/api/auth/user/mercado-pago")
                 .pending("http://localhost:8080/api/auth/user/mercado-pago")
                 .build();
