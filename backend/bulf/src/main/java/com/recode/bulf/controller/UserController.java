@@ -5,9 +5,11 @@ import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
 import com.recode.bulf.dto.PurchaseRequest;
+import com.recode.bulf.dto.PurchaseResponseUserDto;
 import com.recode.bulf.service.JwtService;
 import com.recode.bulf.service.MercadoPagoService;
 import com.recode.bulf.service.ProductService;
+import com.recode.bulf.service.PurchaseService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,8 @@ public class UserController {
     private final MercadoPagoService mercadoPagoService;
     @Autowired
     private final ProductService productService;
+    @Autowired
+    private final PurchaseService purchaseService;
 
     @PostMapping("/purchase")
     public ResponseEntity<String> createPurchase(@RequestBody PurchaseRequest purchaseRequest, @RequestHeader("Authorization") final String authHeader) {
@@ -44,6 +48,16 @@ public class UserController {
         } catch (MPApiException e) {
             return ResponseEntity.status(500).body("Error payments preference");
         }
+    }
+
+    @GetMapping("/purchase")
+    public ResponseEntity<?> getPurchaseByUser(@RequestParam String email, @RequestHeader("Authorization") final String authHeader) {
+        String token = authHeader.replace("Bearer ", "");
+        if (!jwtService.isTokenValid(token, email)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token or email");
+        }
+
+        return ResponseEntity.ok(purchaseService.getPurchaseByEmail(email));
     }
 
     @GetMapping("/mercado-pago")
