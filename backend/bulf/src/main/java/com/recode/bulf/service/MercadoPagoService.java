@@ -102,10 +102,9 @@ public class MercadoPagoService {
                 .name(user.getUsername())
                 .email(user.getEmail())
                 .build();
-        System.out.println(payer.toString());
         PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.
                 builder()
-                .failure("http://localhost:5173/home")
+                .failure("http://localhost:5173/failed-purchase")
                 .success("http://localhost:8080/api/auth/user/mercado-pago")
                 .pending("http://localhost:8080/api/auth/user/mercado-pago")
                 .build();
@@ -115,7 +114,7 @@ public class MercadoPagoService {
                 .payer(payer)
                 .backUrls(backUrls)
                 .autoReturn("approved")
-                .notificationUrl("https://www.youtube.com/")
+                .notificationUrl("http://localhost:8080/api/auth/user/notifications")
                 .build();
         return preferenceRequest;
     }

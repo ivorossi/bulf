@@ -47,9 +47,14 @@ public class UserController {
     }
 
     @GetMapping("/mercado-pago")
-    public RedirectView receiveMercadoPagoResponse(@RequestParam Long payment_id) {
-        mercadoPagoService.createPurchase(payment_id);
-        return new RedirectView("http://localhost:5173/succes-purchase");
+    public RedirectView receiveMercadoPagoResponse(
+            @RequestParam Long payment_id,
+            @RequestParam String status) {
+        if (status.equals("approved")) {
+            mercadoPagoService.createPurchase(payment_id);
+            return new RedirectView("http://localhost:5173/success-purchase");
+        }
+        return new RedirectView("http://localhost:5173/failed-purchase");
     }
 
 }
