@@ -21,7 +21,7 @@ public class User {
     @GeneratedValue
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false, unique = true)
@@ -30,8 +30,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(columnDefinition = "boolean default true")
-    private boolean isAdmin;
+    @Column()
+    private boolean isAdmin = false;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Token> tokens;

@@ -46,11 +46,11 @@ public class MercadoPagoService {
                 ObjectMapper mapper = new ObjectMapper();
                 JsonNode jsonNode = mapper.readTree(response.body());
                 List<Product> products = new ArrayList<>();
-                User user = userRepository.findByEmail(
+                User user = userRepository.findByUsername(
                         jsonNode.
                                 path("additional_info").
                                 path("payer").
-                                path("email").
+                                path("first_name").
                                 asText()
                 ).get();
                 Purchase purchase = new Purchase();
