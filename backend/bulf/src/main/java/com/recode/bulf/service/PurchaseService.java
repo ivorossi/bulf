@@ -1,7 +1,7 @@
 package com.recode.bulf.service;
 
-import com.recode.bulf.dto.ProductCard;
-import com.recode.bulf.dto.PurchaseResponseUserDto;
+import com.recode.bulf.dto.ProductPurchaseDTO;
+import com.recode.bulf.dto.PurchaseDTO;
 import com.recode.bulf.model.Product;
 import com.recode.bulf.model.Purchase;
 import com.recode.bulf.model.User;
@@ -22,37 +22,42 @@ public class PurchaseService {
     private final UserRepository userRepository;
     @Autowired
     private final PurchaseRepository purchaseRepository;
-    public List<PurchaseResponseUserDto> getPurchaseByEmail(String email) {
+
+    public List<PurchaseDTO> getPurchaseByEmail(String email) {
         User user = userRepository.findByEmail(email).get();
-        List<PurchaseResponseUserDto> response = new ArrayList<>();
-         List<Purchase> purchases = purchaseRepository.findByUserId(user.getId());
-         for (Purchase purchase: purchases){
-             List<ProductCard> productsResponse = new ArrayList<>();
-             for(Product product : purchase.getProducts()){
-                 productsResponse.add(
-                         new ProductCard(
-                                 product.getId(),
-                                 product.getName(),
-                                 product.getMainImage(),
-                                 product.getDescription(),
-                                 product.getPrice()
-                         )
-                 );
-             }
-             response.add(
-                     new PurchaseResponseUserDto(
-                             purchase.getPaymentId(),
-                             productsResponse,
-                             purchase.getTotalCost(),
-                             purchase.getStatus()
-                             )
-             );
-         }
-         return response;
+        List<Purchase> purchases = purchaseRepository.findPurchasesByUserId(user.getId());
+        return response(purchases);
     }
 
-    public List<Purchase> getAll() {
-        return purchaseRepository.findAll();
+    public List<PurchaseDTO> getAll() {
+        return response(purchaseRepository.findAllPurchases());
+    }
+
+    private List<PurchaseDTO> response(List<Purchase> purchases){
+        List<PurchaseDTO> response = new ArrayList<>();
+        for (Purchase purchase : purchases) {
+            List<ProductPurchaseDTO> productsResponse = new ArrayList<>();
+            for (Product product : purchase.getProducts()) {
+                productsResponse.add(
+                        new ProductPurchaseDTO(
+                                product.getId(),
+                                product.getName(),
+                                product.getPrice()
+                        )
+                );
+            }
+            response.add(
+                    new PurchaseDTO(
+                            purchase.getId(),
+                            purchase.getPaymentId(),
+                            purchase.getTotalCost(),
+                            purchase.getStatus(),
+                            purchase.getUser().getId(),
+                            productsResponse
+                    )
+            );
+        }
+        return response;
     }
 }
 

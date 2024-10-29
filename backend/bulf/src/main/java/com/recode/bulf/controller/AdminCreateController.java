@@ -1,5 +1,6 @@
 package com.recode.bulf.controller;
 
+import com.recode.bulf.dto.PurchaseDTO;
 import com.recode.bulf.model.*;
 import com.recode.bulf.service.AdminService;
 import com.recode.bulf.service.ProductService;
@@ -94,7 +95,7 @@ public class AdminCreateController {
     }
 
     @GetMapping("/purchase")
-    public ResponseEntity<List<Purchase>> getAllPurchase() {
+    public ResponseEntity<List<PurchaseDTO>> getAllPurchase() {
         return ResponseEntity.ok(purchaseService.getAll());
     }
 

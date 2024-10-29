@@ -30,7 +30,7 @@ public class Purchase {
     @Column(name = "preference_id", nullable = false)
     private String preferenceId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false,referencedColumnName = "id")
     private User user;
 

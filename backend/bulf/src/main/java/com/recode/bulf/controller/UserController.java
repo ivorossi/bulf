@@ -5,7 +5,6 @@ import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
 import com.recode.bulf.dto.PurchaseRequest;
-import com.recode.bulf.dto.PurchaseResponseUserDto;
 import com.recode.bulf.service.JwtService;
 import com.recode.bulf.service.MercadoPagoService;
 import com.recode.bulf.service.ProductService;
