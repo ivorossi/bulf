@@ -69,8 +69,6 @@ public class MercadoPagoService {
                 purchase.setUser(user);
                 purchase.setProducts(products);
                 purchaseRepository.save(purchase);
-                user.setPurchases(List.of(purchase));
-                userRepository.save(user);
             } catch (JsonMappingException e) {
                 throw new RuntimeException(e);
             } catch (JsonProcessingException e) {
