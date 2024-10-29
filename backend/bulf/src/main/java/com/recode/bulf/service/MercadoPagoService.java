@@ -114,7 +114,7 @@ public class MercadoPagoService {
                 .payer(payer)
                 .backUrls(backUrls)
                 .autoReturn("approved")
-                .notificationUrl("http://localhost:8080/api/auth/user/notifications")
+                .notificationUrl("https://github.com/ivorossi")
                 .build();
         return preferenceRequest;
     }
