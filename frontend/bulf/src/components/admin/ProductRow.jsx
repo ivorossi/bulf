@@ -89,7 +89,6 @@ ProductRow.propTypes = {
     categoryId: PropTypes.number.isRequired,
     subcategoryId: PropTypes.number.isRequired,
   }).isRequired,
-  onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   genderMap: PropTypes.object.isRequired,
   categoryMap: PropTypes.object.isRequired,
