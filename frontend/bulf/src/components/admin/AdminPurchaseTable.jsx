@@ -1,21 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useUser } from '../user/UserContext';
-import './AdminPurchaseTable.css'; // Importa la hoja de estilos
+import './AdminPurchaseTable.css';
 
 function AdminPurchaseTable() {
     const { token } = useUser();
     const [purchases, setPurchases] = useState([]);
-
     useEffect(() => {
         const fetchPurchases = async () => {
             try {
                 const response = await fetch(`http://localhost:8080/api/auth/admin/purchase`, {
                     headers: {
-                        'Authorization': `Bearer ${token}`, // Asegúrate de incluir el token
+                        'Authorization': `Bearer ${token}`,
                     },
                 });
                 if (!response.ok) throw new Error("Error al obtener las compras");
-                
                 const data = await response.json();
                 setPurchases(data);
             } catch (error) {
@@ -24,7 +22,6 @@ function AdminPurchaseTable() {
         };
         fetchPurchases();
     }, [token]);
-
     return (
         <div className="purchase-container2">
             <h2 className="title">Lista de Compras Administrativas</h2>

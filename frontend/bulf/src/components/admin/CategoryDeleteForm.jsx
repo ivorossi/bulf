@@ -49,7 +49,7 @@ const DeleteCategoryForm = () => {
                 alert('Categoría eliminada exitosamente');
                 setSelectedGenderId('');
                 setSelectedCategoryId('');
-                setCategories([]); // Limpia las categorías
+                setCategories([]);
             } else {
                 const errorMessage = await response.text();
                 setError(`Error al eliminar la categoría: ${errorMessage}`);
@@ -65,14 +65,14 @@ const DeleteCategoryForm = () => {
     return (
         <form className="form-container" onSubmit={handleSubmit}>
             <div className="form-group">
-                <label htmlFor="gender">Seleccionar Género:</label>
+                <label htmlFor="gender">Gender:</label>
                 <select
                     id="gender"
                     value={selectedGenderId}
                     onChange={handleGenderChange}
                     required
                 >
-                    <option value="">Seleccionar Género</option>
+                    <option value="">Select gender</option>
                     {genders.map((gender) => (
                         <option key={gender.id} value={gender.id}>
                             {gender.name}
@@ -81,7 +81,7 @@ const DeleteCategoryForm = () => {
                 </select>
             </div>
             <div className="form-group">
-                <label htmlFor="category">Seleccionar Categoría:</label>
+                <label htmlFor="category">Category:</label>
                 <select
                     id="category"
                     value={selectedCategoryId}
@@ -89,7 +89,7 @@ const DeleteCategoryForm = () => {
                     required
                     disabled={!selectedGenderId}
                 >
-                    <option value="">Seleccionar Categoría</option>
+                    <option value="">Select category</option>
                     {categories.map((category) => (
                         <option key={category.id} value={category.id}>
                             {category.name}
@@ -99,7 +99,7 @@ const DeleteCategoryForm = () => {
             </div>
             {error && <p className="error-message">{error}</p>}
             <button type="submit" className="submit-btn" disabled={isSubmitting}>
-                {isSubmitting ? 'Eliminando...' : 'Eliminar'}
+                {isSubmitting ? 'Deleting...' : 'Delete'}
             </button>
         </form>
     );

@@ -9,7 +9,6 @@ const EditProductForm = ({ product, onClose }) => {
   const [selectedGender, setSelectedGender] = useState(product.genderId || '');
   const [selectedCategory, setSelectedCategory] = useState(product.categoryId || '');
   const [selectedSubcategory, setSelectedSubcategory] = useState(product.subcategoryId || '');
-
   const [name, setName] = useState(product.name || '');
   const [mainImage, setMainImage] = useState(product.mainImage || '');
   const [images, setImages] = useState(product.images || ['']);
@@ -117,7 +116,7 @@ const EditProductForm = ({ product, onClose }) => {
     <form className="product-form" onSubmit={handleSubmit}>
       <div className="column">
         <div className="form-group">
-          <label htmlFor="name">Nombre del Producto:</label>
+          <label htmlFor="name">Product name:</label>
           <input
             type="text"
             id="name"
@@ -126,16 +125,15 @@ const EditProductForm = ({ product, onClose }) => {
             required
           />
         </div>
-
         <div className="form-group">
-          <label htmlFor="gender">Género:</label>
+          <label htmlFor="gender">Gender:</label>
           <select
             id="gender"
             value={selectedGender}
             onChange={handleGenderChange}
             required
           >
-            <option value="">Selecciona un género</option>
+            <option value="">Select gender</option>
             {genders.map((gender) => (
               <option key={gender.id} value={gender.id}>
                 {gender.name}
@@ -145,7 +143,7 @@ const EditProductForm = ({ product, onClose }) => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="category">Categoría:</label>
+          <label htmlFor="category">Category:</label>
           <select
             id="category"
             value={selectedCategory}
@@ -153,7 +151,7 @@ const EditProductForm = ({ product, onClose }) => {
             required
             disabled={!categories.length}
           >
-            <option value="">Selecciona una categoría</option>
+            <option value="">Select category</option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}
@@ -161,9 +159,8 @@ const EditProductForm = ({ product, onClose }) => {
             ))}
           </select>
         </div>
-
         <div className="form-group">
-          <label htmlFor="subcategory">Subcategoría:</label>
+          <label htmlFor="subcategory">Subcategory::</label>
           <select
             id="subcategory"
             value={selectedSubcategory}
@@ -171,7 +168,7 @@ const EditProductForm = ({ product, onClose }) => {
             required
             disabled={!subcategories.length}
           >
-            <option value="">Selecciona una subcategoría</option>
+            <option value="">Select Subcategory</option>
             {subcategories.map((subcategory) => (
               <option key={subcategory.id} value={subcategory.id}>
                 {subcategory.name}
@@ -181,7 +178,7 @@ const EditProductForm = ({ product, onClose }) => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="mainImage">Imagen principal:</label>
+          <label htmlFor="mainImage">Main image:</label>
           <input
             type="text"
             id="mainImage"
@@ -190,9 +187,8 @@ const EditProductForm = ({ product, onClose }) => {
             required
           />
         </div>
-
         <div className="form-group">
-          <label htmlFor="price">Precio:</label>
+          <label htmlFor="price">Price:</label>
           <input
             type="number"
             id="price"
@@ -205,7 +201,7 @@ const EditProductForm = ({ product, onClose }) => {
 
       <div className="column">
         <div className="form-group">
-          <label>Imágenes adicionales:</label>
+          <label>Secundary images:</label>
           {images.map((image, index) => (
             <div key={index} className="image-input-group">
               <input
@@ -217,12 +213,11 @@ const EditProductForm = ({ product, onClose }) => {
             </div>
           ))}
           <button type="button" onClick={handleAddImage} className="add-image-btn">
-            Agregar otra imagen
+            Add image
           </button>
         </div>
-
         <div className="form-group">
-          <label htmlFor="description">Descripción:</label>
+          <label htmlFor="description">Description:</label>
           <textarea
             id="description"
             value={description}
@@ -230,7 +225,6 @@ const EditProductForm = ({ product, onClose }) => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="stock">Stock:</label>
           <input
