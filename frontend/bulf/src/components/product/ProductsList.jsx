@@ -9,7 +9,6 @@ const ProductsList = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
   const { selectedGenderId, selectedCategoryId } = useContext(ProductFilterContext);
 
   useEffect(() => {

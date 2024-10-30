@@ -3,7 +3,6 @@ import './FormStyles.css';
 
 const GenderForm = () => {
     const [name, setName] = useState('');
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -25,7 +24,6 @@ const GenderForm = () => {
             alert('Error en la solicitud');
         }
     };
-
     return (
         <form className="form-container" onSubmit={handleSubmit}>
             <div className="form-group">

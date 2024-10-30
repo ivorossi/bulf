@@ -22,7 +22,6 @@ function AdminPurchaseTable() {
                 console.error("Error fetching purchases:", error);
             }
         };
-
         fetchPurchases();
     }, [token]);
 

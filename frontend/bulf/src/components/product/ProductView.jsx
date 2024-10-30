@@ -126,7 +126,7 @@ const ProductView = () => {
       }
 
       const preferenceId = await response.text();
-      setPreferenceId(preferenceId); // Establece el preferenceId para mostrar el componente Wallet
+      setPreferenceId(preferenceId);
 
     } catch (error) {
       console.error("Error during purchase:", error);
@@ -189,7 +189,7 @@ const ProductView = () => {
           </div>
           {preferenceId && (
             <div className="wallet-container">
-              <Wallet initialization={{ preferenceId }} /> {/* Muestra el componente Wallet */}
+              <Wallet initialization={{ preferenceId }} />
             </div>
           )}
         </div>

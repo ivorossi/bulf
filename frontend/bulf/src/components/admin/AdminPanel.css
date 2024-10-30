@@ -44,6 +44,5 @@
 .admin-delete-buttons {
     margin: 15px;
     display: flex;
-    width: 74%;
     gap: 10px;
 }

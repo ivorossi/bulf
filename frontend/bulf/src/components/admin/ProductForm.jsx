@@ -8,7 +8,6 @@ const ProductForm = () => {
   const [selectedGender, setSelectedGender] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
-
   const [name, setName] = useState('');
   const [mainImage, setMainImage] = useState('');
   const [images, setImages] = useState(['']);
@@ -81,7 +80,6 @@ const ProductForm = () => {
       price,
       stock,
     };
-
     try {
       const response = await fetch('http://localhost:8080/api/auth/admin/product', {
         method: 'POST',
@@ -90,7 +88,6 @@ const ProductForm = () => {
         },
         body: JSON.stringify(product),
       });
-
       if (response.ok) {
         alert('Producto creado exitosamente');
         setName('');
@@ -110,9 +107,7 @@ const ProductForm = () => {
       alert('Error en la solicitud');
     }
   };
-
   return (
-
     <form className="product-form" onSubmit={handleSubmit}>
       <div className="column">
         <div className="form-group">
@@ -125,7 +120,6 @@ const ProductForm = () => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="gender">Género:</label>
           <select
@@ -142,7 +136,6 @@ const ProductForm = () => {
             ))}
           </select>
         </div>
-
         <div className="form-group">
           <label htmlFor="category">Categoría:</label>
           <select
@@ -160,7 +153,6 @@ const ProductForm = () => {
             ))}
           </select>
         </div>
-
         <div className="form-group">
           <label htmlFor="subcategory">Subcategoría:</label>
           <select
@@ -178,7 +170,6 @@ const ProductForm = () => {
             ))}
           </select>
         </div>
-
         <div className="form-group">
           <label htmlFor="mainImage">Imagen principal:</label>
           <input
@@ -199,9 +190,7 @@ const ProductForm = () => {
             required
           />
         </div>
-
       </div>
-
       <div className="column">
         <div className="form-group">
           <label>Imágenes adicionales:</label>
@@ -228,7 +217,6 @@ const ProductForm = () => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="stock">Stock:</label>
           <input
@@ -242,7 +230,6 @@ const ProductForm = () => {
       </div>
       <button type="submit" className="submit-btn">Crear Producto</button>
     </form>
-
   );
 };
 

@@ -78,7 +78,6 @@ const ProductTable = () => {
 
   return (
     <>
-
       <div className="pagination-controls">
         <br />
         <br />
@@ -91,7 +90,6 @@ const ProductTable = () => {
           <option value="100">100</option>
         </select>
       </div>
-
       <table className="product-table">
         <thead >
           <tr>
@@ -121,13 +119,11 @@ const ProductTable = () => {
           ))}
         </tbody>
       </table>
-
       <div className="pagination-wrapper">
         <button onClick={handlePrevPage} disabled={page === 0}>Previous</button>
         <span className="pagination-info">Page {page + 1} of {totalPages}</span>
         <button onClick={handleNextPage} disabled={page === totalPages - 1}>Next</button>
       </div>
-
     </>
   );
 };

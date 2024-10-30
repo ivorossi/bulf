@@ -58,7 +58,6 @@ const ProductRow = ({ product, onDelete, genderMap, categoryMap, subcategoryMap 
           <button className="delete-button" onClick={() => handleDelete(product.id)}>X</button>
         </td>
       </tr>
-
       <Modal
         isOpen={isEditModalOpen}
         onRequestClose={closeEditModal}

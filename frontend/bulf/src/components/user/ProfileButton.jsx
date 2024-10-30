@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import './ProfileButton.css';
 import CartView from './CartView';
 import Modal from 'react-modal';
-import PurchasesTable from './PurchaseTable'; // Asegúrate de importar la vista de compras
+import PurchasesTable from './PurchaseTable';
 
 const ProfileButton = () => {
   const { user, logout } = useUser();

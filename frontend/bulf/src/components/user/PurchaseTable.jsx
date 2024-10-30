@@ -2,11 +2,9 @@ import { useEffect, useState } from 'react';
 import { useUser } from './UserContext';
 import './PurchaseTable.css';
 
-
 function PurchaseTable() {
     const { token, user } = useUser();
     const [purchases, setPurchases] = useState([]);
-
     useEffect(() => {
         const fetchPurchases = async () => {
             if (!user || !user.email) {
@@ -27,10 +25,8 @@ function PurchaseTable() {
                 console.error("Error fetching purchases:", error);
             }
         };
-
         fetchPurchases();
     }, [token, user]);
-
     return (
         <div className="purchase-container">
         <h2>Lista de Compras</h2>
@@ -63,7 +59,6 @@ function PurchaseTable() {
             </tbody>
         </table>
     </div>
-    
     );
 }
 
