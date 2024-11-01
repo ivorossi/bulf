@@ -59,16 +59,16 @@ const AdminPanel = () => {
         <div >
             <h1 className="admin-title">Admin Panel</h1>
             <div className="admin-buttons">
-                <button className="admin-button" onClick={toggleGenderFormModal}>Crear Género</button>
-                <button className="admin-button" onClick={toggleCategoryFormModal}>Crear Categoría</button>
-                <button className="admin-button" onClick={toggleSubcategoryFormModal}>Crear Subcategoría</button>
-                <button className="admin-button" onClick={toggleProductFormModal}>Crear Producto</button>
+                <button className="admin-button" onClick={toggleGenderFormModal}>Add Gender</button>
+                <button className="admin-button" onClick={toggleCategoryFormModal}>Add Category</button>
+                <button className="admin-button" onClick={toggleSubcategoryFormModal}>Add Subcategory</button>
+                <button className="admin-button" onClick={toggleProductFormModal}>Add Product</button>
             </div>
 
             <div className="admin-delete-buttons">
-                <button className="delete-button" onClick={handleDeleteGender}>Borrar Género</button>
-                <button className="delete-button" onClick={handleDeleteCategory}>Borrar Categoría</button>
-                <button className="delete-button" onClick={handleDeleteSubcategory}>Borrar Subcategoría</button>
+                <button className="delete-button" onClick={handleDeleteGender}>Delete Gender</button>
+                <button className="delete-button" onClick={handleDeleteCategory}>Delete Category</button>
+                <button className="delete-button" onClick={handleDeleteSubcategory}>Delete Subcategory</button>
                 <button className="admin-button" onClick={handlePurchaseOrders}>Purchases Orders</button>
             </div>
 

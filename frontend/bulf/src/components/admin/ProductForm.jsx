@@ -111,7 +111,7 @@ const ProductForm = () => {
     <form className="product-form" onSubmit={handleSubmit}>
       <div className="column">
         <div className="form-group">
-          <label htmlFor="name">Nombre del Producto:</label>
+          <label htmlFor="name">Product name:</label>
           <input
             type="text"
             id="name"
@@ -121,14 +121,14 @@ const ProductForm = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="gender">Género:</label>
+          <label htmlFor="gender">Gender:</label>
           <select
             id="gender"
             value={selectedGender}
             onChange={handleGenderChange}
             required
           >
-            <option value="">Selecciona un género</option>
+            <option value="">Select Gender:</option>
             {genders.map((gender) => (
               <option key={gender.id} value={gender.id}>
                 {gender.name}
@@ -137,7 +137,7 @@ const ProductForm = () => {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="category">Categoría:</label>
+          <label htmlFor="category">Category:</label>
           <select
             id="category"
             value={selectedCategory}
@@ -145,7 +145,7 @@ const ProductForm = () => {
             required
             disabled={!categories.length}
           >
-            <option value="">Selecciona una categoría</option>
+            <option value="">Select Category:</option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}
@@ -154,7 +154,7 @@ const ProductForm = () => {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="subcategory">Subcategoría:</label>
+          <label htmlFor="subcategory">Subcategory:</label>
           <select
             id="subcategory"
             value={selectedSubcategory}
@@ -162,7 +162,7 @@ const ProductForm = () => {
             required
             disabled={!subcategories.length}
           >
-            <option value="">Selecciona una subcategoría</option>
+            <option value="">Select Subcategory:</option>
             {subcategories.map((subcategory) => (
               <option key={subcategory.id} value={subcategory.id}>
                 {subcategory.name}
@@ -171,7 +171,7 @@ const ProductForm = () => {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="mainImage">Imagen principal:</label>
+          <label htmlFor="mainImage">Main Image:</label>
           <input
             type="text"
             id="mainImage"
@@ -181,7 +181,7 @@ const ProductForm = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="price">Precio:</label>
+          <label htmlFor="price">Price:</label>
           <input
             type="number"
             id="price"
@@ -193,7 +193,7 @@ const ProductForm = () => {
       </div>
       <div className="column">
         <div className="form-group">
-          <label>Imágenes adicionales:</label>
+          <label>Images:</label>
           {images.map((image, index) => (
             <div key={index} className="image-input-group">
               <input
@@ -205,11 +205,11 @@ const ProductForm = () => {
             </div>
           ))}
           <button type="button" onClick={handleAddImage} className="add-image-btn">
-            Agregar otra imagen
+            Add Image
           </button>
         </div>
         <div className="form-group">
-          <label htmlFor="description">Descripción:</label>
+          <label htmlFor="description">Description:</label>
           <textarea
             id="description"
             value={description}
@@ -228,7 +228,7 @@ const ProductForm = () => {
           />
         </div>
       </div>
-      <button type="submit" className="submit-btn">Crear Producto</button>
+      <button type="submit" className="submit-btn">Create Product</button>
     </form>
   );
 };
