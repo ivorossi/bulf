@@ -1,8 +1,8 @@
-import { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
-import { ProductFilterContext } from '../product/ProductFilterContext';
-import CategoryButton from './CategoryButton';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useState } from "react";
+import PropTypes from "prop-types";
+import { ProductFilterContext } from "../product/ProductFilterContext";
+import CategoryButton from "./CategoryButton";
+import { useNavigate } from "react-router-dom";
 
 const GenderButton = ({ gender }) => {
   const navigate = useNavigate();
@@ -18,19 +18,17 @@ const GenderButton = ({ gender }) => {
   };
 
   const handleClick = () => {
-    navigate('/home');
+    navigate("/home");
     handleGenderSelect(gender.id);
   };
 
   return (
     <div
-      className={'gender-button'}
+      className={"gender-button"}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div
-        className='cien'
-        onClick={handleClick}>
+      <div className="cien" onClick={handleClick}>
         {gender.name}
       </div>
       {isDropdownVisible && (

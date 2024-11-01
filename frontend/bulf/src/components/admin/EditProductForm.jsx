@@ -1,29 +1,33 @@
-import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import './ProductForm.css';
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import "./ProductForm.css";
 
 const EditProductForm = ({ product, onClose }) => {
   const [genders, setGenders] = useState([]);
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
-  const [selectedGender, setSelectedGender] = useState(product.genderId || '');
-  const [selectedCategory, setSelectedCategory] = useState(product.categoryId || '');
-  const [selectedSubcategory, setSelectedSubcategory] = useState(product.subcategoryId || '');
-  const [name, setName] = useState(product.name || '');
-  const [mainImage, setMainImage] = useState(product.mainImage || '');
-  const [images, setImages] = useState(product.images || ['']);
-  const [description, setDescription] = useState(product.description || '');
+  const [selectedGender, setSelectedGender] = useState(product.genderId || "");
+  const [selectedCategory, setSelectedCategory] = useState(
+    product.categoryId || ""
+  );
+  const [selectedSubcategory, setSelectedSubcategory] = useState(
+    product.subcategoryId || ""
+  );
+  const [name, setName] = useState(product.name || "");
+  const [mainImage, setMainImage] = useState(product.mainImage || "");
+  const [images, setImages] = useState(product.images || [""]);
+  const [description, setDescription] = useState(product.description || "");
   const [price, setPrice] = useState(product.price || 0);
   const [stock, setStock] = useState(product.stock || 0);
 
   useEffect(() => {
     const fetchGenders = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/genders');
+        const response = await fetch("http://localhost:8080/api/genders");
         const data = await response.json();
         setGenders(data);
       } catch (error) {
-        console.error('Error al obtener los géneros:', error);
+        console.error("Error al obtener los géneros:", error);
       }
     };
     fetchGenders();
@@ -31,7 +35,9 @@ const EditProductForm = ({ product, onClose }) => {
 
   useEffect(() => {
     if (selectedGender) {
-      const selectedGenderObj = genders.find(gender => gender.id === parseInt(selectedGender));
+      const selectedGenderObj = genders.find(
+        (gender) => gender.id === parseInt(selectedGender)
+      );
       if (selectedGenderObj) {
         setCategories(selectedGenderObj.categories || []);
       }
@@ -40,7 +46,9 @@ const EditProductForm = ({ product, onClose }) => {
 
   useEffect(() => {
     if (selectedCategory) {
-      const selectedCategoryObj = categories.find(category => category.id === parseInt(selectedCategory));
+      const selectedCategoryObj = categories.find(
+        (category) => category.id === parseInt(selectedCategory)
+      );
       if (selectedCategoryObj) {
         setSubcategories(selectedCategoryObj.subcategories || []);
       }
@@ -52,14 +60,14 @@ const EditProductForm = ({ product, onClose }) => {
     setSelectedGender(genderId);
     setCategories([]);
     setSubcategories([]);
-    setSelectedCategory('');
-    setSelectedSubcategory('');
+    setSelectedCategory("");
+    setSelectedSubcategory("");
   };
 
   const handleCategoryChange = (e) => {
     const categoryId = e.target.value;
     setSelectedCategory(categoryId);
-    setSelectedSubcategory('');
+    setSelectedSubcategory("");
   };
 
   const handleSubcategoryChange = (e) => {
@@ -73,7 +81,7 @@ const EditProductForm = ({ product, onClose }) => {
   };
 
   const handleAddImage = () => {
-    setImages([...images, '']);
+    setImages([...images, ""]);
   };
 
   const handleSubmit = async (e) => {
@@ -85,30 +93,33 @@ const EditProductForm = ({ product, onClose }) => {
       categoryId: selectedCategory,
       subcategoryId: selectedSubcategory,
       mainImage,
-      images: images.filter(url => url),
+      images: images.filter((url) => url),
       description,
       price,
       stock,
     };
 
     try {
-      const response = await fetch(`http://localhost:8080/api/auth/admin/product/${product.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedProduct),
-      });
+      const response = await fetch(
+        `http://localhost:8080/api/auth/admin/product/${product.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedProduct),
+        }
+      );
 
       if (response.ok) {
-        alert('Producto actualizado exitosamente');
-        onClose(); 
+        alert("Producto actualizado exitosamente");
+        onClose();
       } else {
-        alert('Error al actualizar el producto');
+        alert("Error al actualizar el producto");
       }
     } catch (error) {
-      console.error('Error en la solicitud:', error);
-      alert('Error en la solicitud');
+      console.error("Error en la solicitud:", error);
+      alert("Error en la solicitud");
     }
   };
 
@@ -212,7 +223,11 @@ const EditProductForm = ({ product, onClose }) => {
               />
             </div>
           ))}
-          <button type="button" onClick={handleAddImage} className="add-image-btn">
+          <button
+            type="button"
+            onClick={handleAddImage}
+            className="add-image-btn"
+          >
             Add image
           </button>
         </div>
@@ -236,7 +251,9 @@ const EditProductForm = ({ product, onClose }) => {
           />
         </div>
       </div>
-      <button type="submit" className="submit-btn">Guardar Cambios</button>
+      <button type="submit" className="submit-btn">
+        Guardar Cambios
+      </button>
     </form>
   );
 };
