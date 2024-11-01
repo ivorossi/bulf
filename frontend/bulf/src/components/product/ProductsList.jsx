@@ -10,11 +10,9 @@ const ProductsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const { selectedGenderId, selectedCategoryId } = useContext(ProductFilterContext);
-
   useEffect(() => {
     const fetchProducts = async () => {
       let productsListUrl = getApiUrl(`/product?page=${currentPage - 1}`);
-
       try {
         let response;
 
@@ -26,7 +24,6 @@ const ProductsList = () => {
         } else {
           productsListUrl = getApiUrl(`/product?page=${currentPage - 1}`);
         }
-
         response = await fetch(productsListUrl);
         const data = await response.json();
         setProducts(data.content);
@@ -38,11 +35,9 @@ const ProductsList = () => {
     fetchProducts();
   }, [currentPage, selectedGenderId, selectedCategoryId]);
 
-
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedGenderId, selectedCategoryId]);
-
   return (
     <div>
       <div className="products-grid">

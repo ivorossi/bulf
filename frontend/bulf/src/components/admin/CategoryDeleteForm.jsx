@@ -44,7 +44,6 @@ const DeleteCategoryForm = () => {
                     'Content-Type': 'application/json',
                 },
             });
-
             if (response.ok) {
                 alert('Categoría eliminada exitosamente');
                 setSelectedGenderId('');
@@ -61,7 +60,6 @@ const DeleteCategoryForm = () => {
             setIsSubmitting(false);
         }
     };
-
     return (
         <form className="form-container" onSubmit={handleSubmit}>
             <div className="form-group">
