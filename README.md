@@ -10,7 +10,7 @@
         <strong>Ivo Martin Rossi, Legajo: 9872</strong>
     <h2>Requirements:</h2>
     <ul>
-        <li><code>git clone https://github.com/CodeStrong2023/re-code-ecommerce.git</code></li>
+        <li><code>git clone https://github.com/ivorossi/bulf.git</code></li>
         <li><strong>Java 21</strong>: <a href="https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html">download for windows</a></li>
         <li><strong>Maven</strong>: <a href="https://maven.apache.org/download.cgi">download for windows</a></li>
         <li><strong>Node.js v21.7.3 </strong>: <a href="https://nodejs.org/en/download/package-manager">download for windows</a></li>
